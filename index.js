@@ -120,3 +120,17 @@ findPair(numbers);
 //* "n" is non-dominant term here, as it will consume less time
 //* So in ths kind of condition , while explaining our code   we remove the non-dominant term and we are left with O(n^2)
 //* So even technically it is O(n^2 + n) but still we will say the big O of above code is O(n^2)
+
+//* ⁡⁣⁢⁣O(log n)⁡
+//*  O(log n) time complexity Refers to an algorithm's runtime close logarithmically with the size of Input Data(n). In simple terms as the input size increases the time it takes for the algorithm to run increases slowly.
+//* lets we are trying to find 1 from below list
+//* 1,2,3,4,5,6,7,8
+//* ⁡⁣⁢⁣1,2,3,4⁡  --  5,6,7,8,
+//* ⁡⁣⁢⁣1,2⁡  -- 3,4
+//* ⁡⁣⁢⁣1 ⁡-- 2  --> 1
+//* in each step it break the list into half and only took that half where 1 exist. So it took three steps to find 1.
+//*  log_2 8 = ?
+//* above question is 2 to the what power equals 8 . so how many time we have to multiply 2 to get 8
+//* the answer is 3.
+//* So 2 to the 3 is equal to 8
+//* that what we did in above example
