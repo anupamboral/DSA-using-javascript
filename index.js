@@ -134,3 +134,51 @@ findPair(numbers);
 //* the answer is 3.
 //* So 2 to the 3 is equal to 8
 //* that what we did in above example
+
+//* ⁡⁣⁢⁣DSA Arrays
+//* Array data structure - Data structure array is an ordered collection of elements that can be accessed using numerical index.
+//* example - ["a",1,true,"b",false,2]
+//*  now we will make our custom array, using classes.
+//* so we will create a class named MyArray and inside tit will will write the constructor function and inside it we have to write our initial values for our array , so initially we will set this.length = 0 ; and then this data = {}; because we need some place to push our items.
+class MyArray {
+  constructor() {
+    this.length = 0;
+    this.data = {};
+  }
+  push(item) {
+    this.data[this.length] = item; //* while creating first instance it will set the zeroth index value to this item.
+    // console.log(this.data);
+    //* now after adding a item we have to increment the length
+    this.length++;
+    return this.length;
+  }
+
+  get(index) {
+    return this.data[index];
+  }
+  pop() {
+    const lastItem = this.data[this.length - 1]; //* to get last item
+    //*deleting the item
+    delete this.data[this.length - 1];
+    console.log(this.data);
+    //* decrementing the length
+    this.length--;
+    //* returning so we can know which item we deleted
+    return lastItem;
+  }
+}
+//* creating a instance using MyArray class, and saving its value into a variable
+const myNewArray = new MyArray();
+console.log(myNewArray);
+//* now we will define our own algorithms inside this MyArray;
+//* so first algorithm we are create is push method
+myNewArray.push("apple"); //*{0: 'apple'}
+myNewArray.push("grape");
+myNewArray.push("banana");
+console.log(myNewArray);
+
+//* now let's build our get algorithm here we have to pass the index and it will return the value of that index
+
+console.log(myNewArray.get(2)); //* banana
+myNewArray.pop();
+//* now let's build th pop method , it will delete the last item from the data and also return it.
