@@ -114,7 +114,7 @@ function findPair(arr) {
   //* So in ths kind of condition , while explaining our code   we remove the non-dominant term and we are left with O(n^2)
   //* So even technically it is O(n^2 + n) but still we will say the big O of above code is O(n^2)
 }
-findPair(numbers);
+// findPair(numbers);
 //*   //* If we combine all the "O" operation above it become O(n^2 + n)
 //* (n^2) is dominant here because it will consume more time
 //* "n" is non-dominant term here, as it will consume less time
@@ -166,19 +166,81 @@ class MyArray {
     //* returning so we can know which item we deleted
     return lastItem;
   }
+  shift() {
+    //* selecting the first item
+    const firstItem = this.data[0];
+
+    //* re-indexing the items (lets say the items were 2,3,4,5 in the array and after deleting the first number 2 which index was 0 , now 3 's index should be 0 and 4 's index should be 1 and so on)
+    for (let i = 0; i < this.length; i++) {
+      this.data[i] = this.data[i + 1]; //* setting each index's value to its next index's value
+      console.log(this.data[i]);
+    }
+    delete this.data[this.length - 1]; //* as we are setting every item's value equals to next item value so the last item value will become undefined .that's why we are deleting it
+    this.length--; //* as deleted first element so we are decreasing the length.
+    return firstItem;
+  }
+
+  deleteByIndex(index) {
+    const item = this.data[index];
+    //* reIndexing
+    for (let i = index; i < this.length; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    delete this.data[this.length - 1];
+    this.length--;
+    return item;
+  }
 }
 //* creating a instance using MyArray class, and saving its value into a variable
 const myNewArray = new MyArray();
-console.log(myNewArray);
+// console.log(myNewArray);
 //* now we will define our own algorithms inside this MyArray;
 //* so first algorithm we are create is push method
 myNewArray.push("apple"); //*{0: 'apple'}
 myNewArray.push("grape");
 myNewArray.push("banana");
-console.log(myNewArray);
+myNewArray.push("mango");
+// console.log(myNewArray);
 
 //* now let's build our get algorithm here we have to pass the index and it will return the value of that index
 
-console.log(myNewArray.get(2)); //* banana
-myNewArray.pop();
+// console.log(myNewArray.get(2)); //* banana
 //* now let's build th pop method , it will delete the last item from the data and also return it.
+// myNewArray.pop();
+
+//* Now we will create our algorithm for shift method which removes the first item from the array and also return the removed item.
+// console.log(myNewArray);
+// console.log(myNewArray.shift());
+// console.log(myNewArray);
+//* Now we will create an algorithm name deleteByIndex which will take a index number as argument and delete that index
+// console.log(myNewArray);
+// console.log(myNewArray.deleteByIndex(1));
+// console.log(myNewArray);
+//////
+//*   reversing a string
+//* steps
+//* 1. converting it a array (we used split for that with "" it split it after every letter)
+//* 2. then reverse the array (we used reverse method)
+//* 3. converting to string from array (we used join method with "" to join it from every letter)
+function reverseString(string) {
+  return string.split("").reverse().join("");
+}
+
+console.log(reverseString("production"));
+
+/////
+//* make a function which will tell if the string is a palindrome or not.
+//* if the reverse string is equal to the original one then that word is a palindrome
+//* example cddc => cddc👍🏻
+//* abba => abba 👍🏻
+//* anupam => mapuna❌ not a palindrom
+//* =>
+//* steps we taken
+//* 1. converting it a array (we used split for that with "" it split it after every letter)
+//* 2. then reverse the array (we used reverse method)
+//* 3. converting to string from array (we used join method with "" to join it from every letter)
+//* comparing the original string with the reversed string.
+const palindrome = (str) => str.split("").reverse().join("") === str;
+console.log(palindrome("abba")); //* true
+console.log(palindrome("cddc")); //*true
+console.log(palindrome("anupam")); //* false
