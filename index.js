@@ -244,3 +244,58 @@ const palindrome = (str) => str.split("").reverse().join("") === str;
 console.log(palindrome("abba")); //* true
 console.log(palindrome("cddc")); //*true
 console.log(palindrome("anupam")); //* false
+
+//* Reversing integers(Numbers)
+//* steps we taken
+//* 1. converting it to string,then  converting it a array (we used split for that with "" it split it after every letter)
+//* 2. then reverse the array (we used reverse method)
+//* 3. converting to string from array (we used join method with "" to join it from every letter)
+//* 4. converting it back to number
+function reverseInteger(number) {
+  const reversedString = String(number).split("").reverse().join("");
+  console.log(reversedString);
+  return parseInt(reversedString); //* we can also use Number() or + to convert it.
+}
+console.log(reverseInteger(4233));
+
+//* capitalizing first letters of every word
+//* steps
+//* converting everything to lowerCase
+//* splitting it from the space " "
+//* iterating using map and then capitalizing the first letter and then adding the rest part using slice(1)
+//* then join it again with space" ".
+
+const capitalize = (str) => {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");
+};
+console.log(capitalize("dj bravo")); //* Dj Bravo
+console.log(capitalize("LION KING")); //* Lion King
+
+//* creating a FizzBuzz function
+//* 1. print numbers from 1 to n
+//* 2. If number is divisible by 3 , print , "Fizz"
+//* 3. If number is divisible by 5 , print , "Buzz"
+//* 4. If number is divisible by 3 and 5 , print , "FizzBuzz"
+//* 5. Else print the number
+
+//* =>
+//* first we loop the number
+//* then check if it divisible by 3 and 5 , with this if (i % 3 === 0 && i % 5 === 0) and the other steps see below
+const fizzBuzz = (num) => {
+  for (let i = 1; i <= num; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      console.log("FizzBuzz");
+    } else if (i % 3 === 0) {
+      console.log("Fizz");
+    } else if (i % 5 === 0) {
+      console.log("Buzz");
+    } else {
+      console.log(i);
+    }
+  }
+};
+fizzBuzz(15);
