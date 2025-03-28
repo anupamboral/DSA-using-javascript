@@ -299,3 +299,34 @@ const fizzBuzz = (num) => {
   }
 };
 fizzBuzz(15);
+
+//* Max Profit challenge
+//* Imagine you are buying and selling stocks throughout the year your job is to find biggest profit you could make by buying low and selling high only once.
+//* stock prices in each day of a week - 7,1,5,3,6,4
+//* now find the answer of below
+//* The difference between the cheapest price you could have bought the stock and the most expensive price you could have sold it later on.
+const maxProfit = (prices) => {
+  let minPrice = prices[0]; //* assuming the first day is the cheapest day to buy
+  let maxProfit = 0;
+  for (let i = 0; i < prices.length; i++) {
+    const currentPrice = prices[i];
+
+    //* update minimum price if the lower price is found
+    minPrice = Math.min(minPrice, currentPrice);
+
+    const potentialProfit = currentPrice - minPrice;
+
+    maxProfit = Math.max(maxProfit, potentialProfit);
+
+    // console.log(maxProfit);
+  }
+  return maxProfit;
+};
+const prices = [7, 1, 5, 3, 6, 4];
+const profit = maxProfit(prices);
+console.log("maximum profit - " + profit);
+
+//* array chunk challenge
+//* write a function  that takes an array and a chunk size as input.The function should return a new array where the original array is split into chunks of the specialized size.
+//* For example if this was the input - chunk([1,2,3,4,5,6,7,8], 3 ), then the output should be [[1,2,3],[4,5,6],[7,8,9]]
+//* Next example, chunkArray([1,2,3,4,5],2) ====> output =>  [[1,2],[3,4]]
