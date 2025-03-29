@@ -367,3 +367,12 @@ const twoSum = (nums, target) => {
 };
 // console.log(twoSum([2, 7, 23, 42], 9)); //*[0,1]
 // console.log(twoSum([20, 70, 30, 60], 100)); //*[1,2]
+
+//* Linked list Masterclass
+//* A linked list is a linear data structure where elements, called nodes, are not stored contiguously in spread each rule contains data and a reference or link , to the next node in the sequence
+//* see the image - linked-list-image.png in images folder.
+//* 1 => 2 => 3=> 4=> null
+//* above every number represent a node, and a linked list is a combination of these nodes,every node is pointing to another node and when we don't have another node then it will point to null.
+//* every node is a object which has two properties.the data and the reference. so data can be any type of data like - string , number , undefined anything.and second thing is referencing which is basically referencing to another node.and when there is no other node then it will reference to null.
+//* then first node is called Head and the last node is called Tail.
+//* in the image (linked-list-image.png) it is singly linked list 1.35
