@@ -226,7 +226,7 @@ function reverseString(string) {
   return string.split("").reverse().join("");
 }
 
-console.log(reverseString("production"));
+// console.log(reverseString("production"));
 
 /////
 //* make a function which will tell if the string is a palindrome or not.
@@ -241,9 +241,9 @@ console.log(reverseString("production"));
 //* 3. converting to string from array (we used join method with "" to join it from every letter)
 //* comparing the original string with the reversed string.
 const palindrome = (str) => str.split("").reverse().join("") === str;
-console.log(palindrome("abba")); //* true
-console.log(palindrome("cddc")); //*true
-console.log(palindrome("anupam")); //* false
+// console.log(palindrome("abba")); //* true
+// console.log(palindrome("cddc")); //*true
+// console.log(palindrome("anupam")); //* false
 
 //* Reversing integers(Numbers)
 //* steps we taken
@@ -253,10 +253,10 @@ console.log(palindrome("anupam")); //* false
 //* 4. converting it back to number
 function reverseInteger(number) {
   const reversedString = String(number).split("").reverse().join("");
-  console.log(reversedString);
+  // console.log(reversedString);
   return parseInt(reversedString); //* we can also use Number() or + to convert it.
 }
-console.log(reverseInteger(4233));
+// console.log(reverseInteger(4233));
 
 //* capitalizing first letters of every word
 //* steps
@@ -272,8 +272,8 @@ const capitalize = (str) => {
     .map((word) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
 };
-console.log(capitalize("dj bravo")); //* Dj Bravo
-console.log(capitalize("LION KING")); //* Lion King
+// console.log(capitalize("dj bravo")); //* Dj Bravo
+// console.log(capitalize("LION KING")); //* Lion King
 
 //* creating a FizzBuzz function
 //* 1. print numbers from 1 to n
@@ -298,7 +298,7 @@ const fizzBuzz = (num) => {
     }
   }
 };
-fizzBuzz(15);
+// fizzBuzz(15);
 
 //* Max Profit challenge
 //* Imagine you are buying and selling stocks throughout the year your job is to find biggest profit you could make by buying low and selling high only once.
@@ -324,9 +324,46 @@ const maxProfit = (prices) => {
 };
 const prices = [7, 1, 5, 3, 6, 4];
 const profit = maxProfit(prices);
-console.log("maximum profit - " + profit);
+// console.log("maximum profit - " + profit);
 
 //* array chunk challenge
 //* write a function  that takes an array and a chunk size as input.The function should return a new array where the original array is split into chunks of the specialized size.
 //* For example if this was the input - chunk([1,2,3,4,5,6,7,8], 3 ), then the output should be [[1,2,3],[4,5,6],[7,8,9]]
 //* Next example, chunkArray([1,2,3,4,5],2) ====> output =>  [[1,2],[3,4]]
+//* => steps : Create an empty array to hold the chunks then set up a starting index to keep track of where we are in the original array then loop to the original array as long as the index has not reached the end then extract a chunk of the desired size from the original array and then add the extracted chunk to the `chunked` array then Remove the index forward by Chunk size to get the next term and then return the final array of chunks
+const chunk = (array, size) => {
+  const chunked = [];
+  let index = 0;
+  while (index < array.length) {
+    const chunkSlice = array.slice(index, index + size);
+    chunked.push(chunkSlice);
+    // index = index + size;
+    index += size; //* easier way of writing above
+  }
+
+  return chunked;
+};
+
+// console.log(chunk([5, 9, 8, 98, 79, 46, 4, 78], 4));
+
+//* Two sum challenge
+//* Imagine you have a list of numbers and a target number and your job is to find two numbers in that list that add up to the target number you also need to tell which position or indexes those two numbers are at in the list
+//* For example if the list is[2,7,11,15] And Target is 9 then the answer would be [0,1] Because 2(at the index 0) plus 7 (at the index 1) equals
+
+const twoSum = (nums, target) => {
+  //* this is not the best solution because its big is O(n^2)
+  //* loop through every number in the list
+  for (let i = 0; i < nums.length; i++) {
+    //* then for each number check the rest if the list
+    for (let j = i; j < nums.length; j++) {
+      //* if the current number and the one we are checking add up to a target then return their indexes
+      if (nums[i] + nums[j] === target) {
+        return [i, j];
+      }
+    }
+  }
+  //* if we cant's find it then return just empty array
+  return [];
+};
+// console.log(twoSum([2, 7, 23, 42], 9)); //*[0,1]
+// console.log(twoSum([20, 70, 30, 60], 100)); //*[1,2]
