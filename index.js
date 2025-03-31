@@ -429,3 +429,9 @@ myLinkedList.push(12);
 myLinkedList.push(22);
 console.log(myLinkedList);
 //* now using this push method we can add as many nodes as we want.
+
+//* pop method
+//*  it will remove the last item from the entire linked list
+//* we may think that we just need remove the last node and point the tail to the previous node, but actually its not that easy.
+//* So actually we have to iterated the whole linked list then go to the last node, then comeback to its previous node then pointing tail to this previous node and then remove the last node
+//* so to do it we will create two variables , "current" and and "previous" , initially both will point to wards the first node this.head then using while loop we will iterate it , so let's assume the linked list has four nodes, so while iterating , when current will move to second node and as the first node still the previous of this node so it will not move, current will try to find is it the last node or not, using the next property, if it is last then next property value should be null, but it will see it is not the last then it will move to third node and the previous will move to second node, again the current will find that third node is not the last node, so it will move further and as the current reaches to fourth node and the previous reaches to third node , current will find that the last node, then we will remove the last node and using the pervious we will set the tail equals to this node (previous) and now it will point to null as this is the new tail node.
