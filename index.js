@@ -376,3 +376,56 @@ const twoSum = (nums, target) => {
 //* every node is a object which has two properties.the data and the reference. so data can be any type of data like - string , number , undefined anything.and second thing is referencing which is basically referencing to another node.and when there is no other node then it will reference to null.
 //* then first node is called Head and the last node is called Tail.
 //* in the image (linked-list-image.png) it is singly linked list 1.35
+
+//* now let's create a node
+//* so a node is  a object which contains data property and its value can be anything and second property is "next" which we will initially set to null, because initially we will have just one node
+
+//* to create a node we will use class.inside the class, in the constructor function we will receive the value as parameter, and we will create this.value and it value is the parameter we mentioned, and another is this.next it is the reference of next node, and as we know its value will be null initially.
+class Node {
+  constructor(value) {
+    this.data = value;
+    this.next = null;
+  }
+}
+//* and now we will create a linked list using the above node creating class, and to create linked list we will also use class.
+class LinkedList {
+  constructor(value) {
+    this.head = new Node(value);
+    //* initially as we only have one node so head and tail both will pint to same node.
+    this.tail = this.head;
+    this.length = 1; //* to track how many nodes we have inside the linked list
+    // console.log(this.head);
+  }
+  push(value) {
+    //*creating a new node
+    const newNode = new Node(value);
+
+    //* if we don't have any node initially then we have to first set head and tail both equals to this new node to create first node though in the constructor function we already created the first node in the linked list constructor function but this like a precaution so this method can also work if there no nodes.
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    }
+
+    //* at this point as we have not added the new node to the linked list so this.tail is still equals to the previous node basically this.head because initially the head and the tail was same node. and its next property pointing to null , so as we are adding new node , so then the next property need to have the reference of the node , and that is what we are doing, we are adding the reference of new node inside previous node's next property.
+    this.tail.next = newNode;
+    //* and now we are adding the new node by changing the tail node value to the new node
+    this.tail = newNode;
+    //* increasing the length
+    this.length++;
+  }
+}
+const myLinkedList = new LinkedList(1); //* we are passing 1 to set data property value
+// console.log(myLinkedList);
+
+//* now inside linkedList constructor class , we will add a push method,and this will allow us to add a new node at the end of our linkedList
+//* so our first step is to create a new node, because before pushing the node inside our linked list we have to create the node.
+//*  at this point as we have not added the new node to the linked list so this.tail is still equals to the previous node basically this.head because initially the head and the tail was same node. and its next property pointing to null , so as we are adding new node , so then the next property need to have the reference of the node , and that is what we are doing, we are adding the reference of new node inside previous node's next property.(this.tail.next = newNode;)
+
+//* adding new node
+//* and now this new node will become the tail node , as it is located at the end, ( this.tail = newNode;)
+//*  increasing the length as we added a new node (this.length++;)
+//* and this new node finally point towards null (see image - "push method linked-list.jpg" inside images folder)
+myLinkedList.push(12);
+myLinkedList.push(22);
+console.log(myLinkedList);
+//* now using this push method we can add as many nodes as we want.
