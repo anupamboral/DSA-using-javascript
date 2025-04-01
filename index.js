@@ -482,6 +482,47 @@ class LinkedList {
   getLast() {
     return this.tail;
   }
+  get(index) {
+    //* to keep track of the present index as we don't have indexes here
+    let counter = 0; //* as indexes start from 0 so we also start this counter from 0
+
+    //* to have reference of the current node, we have to create a current variable initially it will be the this.head
+    let current = this.head;
+
+    while (current) {
+      //*  when our counter and the index is same the return that node
+      if (counter === index) return current;
+
+      //* if counter and index is not same then increase the counter by 1 and set the current node to its next node
+      counter++;
+
+      current = current.next;
+    }
+
+    //* if we won't able to find that index then just return null.
+    return null;
+  }
+  set(index, updatedValue) {
+    //* to keep track of the present index as we don't have indexes here
+    let counter = 0; //* as indexes start from 0 so we also start this counter from 0
+
+    //* to have reference of the current node, we have to create a current variable initially it will be the this.head
+    let current = this.head;
+    //* until we have any nodes we will iterate it
+    while (current) {
+      //*  when our counter and the index is same then we will change the value of that node and return the node.
+      if (counter === index) {
+        current.data = updatedValue;
+        return current;
+      }
+      //* if counter and index is not same then increase the counter by 1 and set the current node to its next node
+      counter++;
+
+      current = current.next;
+    }
+    //* if we won't able to find that index then just return null.
+    return null;
+  }
 }
 const myLinkedList = new LinkedList(1); //* we are passing 1 to set data property value
 // console.log(myLinkedList);
@@ -513,19 +554,41 @@ myLinkedList.push(8);
 //* unshift method
 //* adding a new node at the beginning of our linked list
 //* so we have to create a new node , then this.head which is right now the first so we should take its reference and  the new node's next property should point to old this.head's reference, because now it will be the second node; and now we can set this.head = new node because this new node should be the first one.
-myLinkedList.unshift(33);
+// myLinkedList.unshift(33);
 // console.log(myLinkedList);
 
 //* shift method
 //* deletes the beginning the node from the linked list
 //* when we have more than one node in that this.head.next already have the reference of the next node so as we want remove the first node so this using the reference of the next node we will set this.head equals to the next node
-myLinkedList.shift();
-console.log(myLinkedList);
+// myLinkedList.shift();
+// console.log(myLinkedList);
 
 //* getFirst method
 //*  it will give us the first node
-console.log(myLinkedList.getFirst());
+// console.log(myLinkedList.getFirst());
 
 //* getLast method
 //* it will give us the last node
-console.log(myLinkedList.getLast());
+// console.log(myLinkedList.getLast());
+
+//* get method(by index)
+//* it will return us the node according to the index we pass as argument.
+//* to keep track of the present index we have to create a counter variable as we don't have indexes here
+//* as indexes start from 0 so we also start this counter from 0
+//* to have reference of the current node, we have to create a current variable initially it will be the this.head
+//*  when our counter and the index is same the return that node
+//* if counter and index is not same then increase the counter by 1 and set the current node to its next node
+//* if we won't able to find that index then just return null.
+
+// console.log(myLinkedList.get(1));
+// console.log(myLinkedList);
+//*set method
+//* it will take index and the value, and set the value(data) of that node which we mentioned using index.
+//* to keep track of the present index we have to create a counter variable as we don't have indexes here
+//* as indexes start from 0 so we also start this counter from 0
+//* to have reference of the current node, we have to create a current variable initially it will be the node
+//*  when our counter and the index is same change the value(data) of that node and the return that node
+//* if counter and index is not same then increase the counter by 1 and set the current node to its next node
+//* if we won't able to find that index then just return null.
+console.log(myLinkedList.set(3, 10));
+console.log(myLinkedList);
