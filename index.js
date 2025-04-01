@@ -413,6 +413,75 @@ class LinkedList {
     //* increasing the length
     this.length++;
   }
+
+  pop() {
+    //* initially if there is no node inside the Linked List we will return undefined;
+    if (!this.head) return null; //* though we should have a node initially because of the linked list constructor class which already sets the first node.
+
+    let current = this.head;
+    let previous = this.head;
+
+    //* this loop should run until we find the node which next property pointing to null; so below loop will run until our below loops current property reaches to the tail(last) node
+    while (current.next) {
+      //* at this point current and previous both pointing to head, in each iteration we are moving the previous variable at the current node position  and then moving the current variable to next node.
+      previous = current;
+      //* moving current variable to next node
+      current = previous.next;
+    }
+    //* at this point our current is reached to the last node because of the above loop and previous is at one node before the last one, now we will set the tail node to this previous variable as we want to delete the last node, so we will shift the tail to this previous and also remove the reference of the last node from this new tail node, so now the linked list will no longer have the last node as we moved the tail to its previous node and also set the next property reference to null so it does not contain the reference of that last node.
+    this.tail = previous;
+    this.tail.next = null;
+    //* decreasing the length
+    this.length--;
+
+    //* if we only had one node then as this method removes last node , so that one node will be also deleted, that's why we will set both head and tail equals to null
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    //* returning the current variable to see what node we removed
+    return current;
+  }
+
+  unshift(value) {
+    //* creating a new node
+    const newNode = new Node(value);
+    //* if by chance , initially this linkedList is empty then we will just just add this new node , so just we need to set both head and tail equals to this newNode, though it should have one node initially because of the linked list constructor class
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    }
+    //*this.head which is right now the first so we should take its reference and  the new node's next property should point to old this.head's reference, because now it will be the second node
+    newNode.next = this.head;
+
+    //* setting this newNode to first position by changing the this.head
+    this.head = newNode;
+    //* increasing the length
+    this.length++;
+  }
+  shift() {
+    //* in case we have no nodes initially we will return undefined
+    if (!this.head) {
+      return undefined;
+    }
+
+    //*  this.head.next already have the reference of the next node so as we want remove the first node so this using the reference of the next node we will set this.head equals to the next node
+    this.head = this.head.next; //* even if we had only one node the because of this this.head head will become null
+    //* decreasing the length
+    this.length--;
+
+    //* if we just had one node inside the linked list then after removing that we will have no nodes then as because of above code this.head will already become null so we just need to set this.tail = null
+    if (this.length === 0) {
+      this.tail = null;
+    }
+  }
+
+  getFirst() {
+    return this.head;
+  }
+  getLast() {
+    return this.tail;
+  }
 }
 const myLinkedList = new LinkedList(1); //* we are passing 1 to set data property value
 // console.log(myLinkedList);
@@ -427,7 +496,8 @@ const myLinkedList = new LinkedList(1); //* we are passing 1 to set data propert
 //* and this new node finally point towards null (see image - "push method linked-list.jpg" inside images folder)
 myLinkedList.push(12);
 myLinkedList.push(22);
-console.log(myLinkedList);
+myLinkedList.push(8);
+// console.log(myLinkedList);
 //* now using this push method we can add as many nodes as we want.
 
 //* pop method
@@ -435,3 +505,27 @@ console.log(myLinkedList);
 //* we may think that we just need remove the last node and point the tail to the previous node, but actually its not that easy.
 //* So actually we have to iterated the whole linked list then go to the last node, then comeback to its previous node then pointing tail to this previous node and then remove the last node
 //* so to do it we will create two variables , "current" and and "previous" , initially both will point to wards the first node this.head then using while loop we will iterate it , so let's assume the linked list has four nodes, so while iterating , when current will move to second node and as the first node still the previous of this node so it will not move, current will try to find is it the last node or not, using the next property, if it is last then next property value should be null, but it will see it is not the last then it will move to third node and the previous will move to second node, again the current will find that third node is not the last node, so it will move further and as the current reaches to fourth node and the previous reaches to third node , current will find that the last node, then we will remove the last node and using the pervious we will set the tail equals to this node (previous) and now it will point to null as this is the new tail node.
+//* to see more details go inside the method and check comments
+// const removedNode = myLinkedList.pop(); //* it will remove the last node
+// console.log(removedNode);
+// console.log(myLinkedList);
+
+//* unshift method
+//* adding a new node at the beginning of our linked list
+//* so we have to create a new node , then this.head which is right now the first so we should take its reference and  the new node's next property should point to old this.head's reference, because now it will be the second node; and now we can set this.head = new node because this new node should be the first one.
+myLinkedList.unshift(33);
+// console.log(myLinkedList);
+
+//* shift method
+//* deletes the beginning the node from the linked list
+//* when we have more than one node in that this.head.next already have the reference of the next node so as we want remove the first node so this using the reference of the next node we will set this.head equals to the next node
+myLinkedList.shift();
+console.log(myLinkedList);
+
+//* getFirst method
+//*  it will give us the first node
+console.log(myLinkedList.getFirst());
+
+//* getLast method
+//* it will give us the last node
+console.log(myLinkedList.getLast());
