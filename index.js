@@ -523,6 +523,30 @@ class LinkedList {
     //* if we won't able to find that index then just return null.
     return null;
   }
+
+  insert(value, index) {
+    //* if user want to put the new node at the beginning of the linked list then we will just use unshift method we already created
+    if (index === 0) {
+      this.unshift(value);
+      return true; //* so below code does not execute
+    }
+    //*  if user want to put the new node at the end of the linked list then we will just use push method we already created and remember at this point we have not increased the length so we don't need to write this.length-1
+    if (index === this.length) {
+      this.push(value);
+      return true; //* so below code does not execute
+    }
+    //* if user want to insert the new node anywhere between;
+    //* create a new node
+    const newNode = new Node(value);
+    //*using get method to find the node right before the desired position(index-1) because the previous node has the reference of next node which should be now its next node, and also after getting the reference of the new node and we will change the next property's reference of the previous node to this new node
+    const previousNode = this.get(index - 1);
+
+    newNode.next = previousNode.next;
+
+    previousNode.next = newNode;
+    this.length++;
+    return true;
+  }
 }
 const myLinkedList = new LinkedList(1); //* we are passing 1 to set data property value
 // console.log(myLinkedList);
@@ -590,5 +614,14 @@ myLinkedList.push(8);
 //*  when our counter and the index is same change the value(data) of that node and the return that node
 //* if counter and index is not same then increase the counter by 1 and set the current node to its next node
 //* if we won't able to find that index then just return null.
-console.log(myLinkedList.set(3, 10));
+// console.log(myLinkedList.set(3, 10));
+console.log(myLinkedList);
+//*insert method
+//* it will take the index where we want to add the new node and also the value of the at new node
+//* if user want to put the new node at the beginning of the linked list then we will just use unshift method we already created
+//*  if user want to put the new node at the end of the linked list then we will just use push method we already created
+//* if user want to insert the new node anywhere between;
+//* create a new node
+//*using get method to find the node right before the desired position(index-1) because the previous node has the reference of next node which should be now its next node, and also after getting the reference of the new node and we will change the next property's reference of the previous node to this new node
+console.log(myLinkedList.insert(97, 3));
 console.log(myLinkedList);
