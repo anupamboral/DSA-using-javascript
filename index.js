@@ -547,6 +547,25 @@ class LinkedList {
     this.length++;
     return true;
   }
+  size() {
+    let counter = 0; //* in each iteration we will increase this
+
+    let current = this.head; //* to keep track of every node
+    //* we will iterate it until we reach at the last node
+    while (current) {
+      //* increasing the counter
+      counter++;
+      //* moving the current variable to next node
+      current = current.next;
+    }
+    return counter;
+  }
+  clear() {
+    //* to empty the linked list
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
 }
 const myLinkedList = new LinkedList(1); //* we are passing 1 to set data property value
 // console.log(myLinkedList);
@@ -615,7 +634,7 @@ myLinkedList.push(8);
 //* if counter and index is not same then increase the counter by 1 and set the current node to its next node
 //* if we won't able to find that index then just return null.
 // console.log(myLinkedList.set(3, 10));
-console.log(myLinkedList);
+// console.log(myLinkedList);
 //*insert method
 //* it will take the index where we want to add the new node and also the value of the at new node
 //* if user want to put the new node at the beginning of the linked list then we will just use unshift method we already created
@@ -623,5 +642,216 @@ console.log(myLinkedList);
 //* if user want to insert the new node anywhere between;
 //* create a new node
 //*using get method to find the node right before the desired position(index-1) because the previous node has the reference of next node which should be now its next node, and also after getting the reference of the new node and we will change the next property's reference of the previous node to this new node
-console.log(myLinkedList.insert(97, 3));
-console.log(myLinkedList);
+// console.log(myLinkedList.insert(97, 3));
+// console.log(myLinkedList);
+//* size method
+//* it will tell us how many node we have inside our linked list
+//* to build this method first  we will create a counter variable, and set its initial value to 0 , then we will create a current variable to keep track of the current element and its value will be this.head because it is the first node, then using while loop we will iterate it until we reach to the last node , inside the loop we will increase the counter by 1 in each iteration, and also set the current variable referent to its next node using the next property.
+//* and at last we will return the counter
+// console.log(myLinkedList.size());
+// console.log(myLinkedList);
+//* clear method
+//* it will empty our linked list
+//* to build we will just set head and tail both values to null and and set the length 0.as we are not returning anything from this so after calling if we directly console log it it will give undefined because we returned nothing nothing from this, so we can just call this method and after that we can console og our linkedList to see if it worked or not;
+// myLinkedList.clear();
+// console.log(myLinkedList);
+//* doubly linked list
+//* so the main difference between a singly linked list and doubly linked list is insides the nodes
+//* so in the doubly linked list node , it will have a extra property which is called the previous property so beside the data and the next property it will also have the "prev" property.(See image - doubly linked-list.jpg inside images folder)
+
+//* creating node constructor class in doubly linked list
+class DoublyLinkedListNode {
+  constructor(value) {
+    this.data = value;
+    this.next = null;
+    this.previous = null;
+  }
+}
+//* Doubly linked list constructor class
+class DoublyLinkedList {
+  constructor(value) {
+    const newNode = new DoublyLinkedListNode(value);
+    //* initially as we will have only one node so both head and tail point to this new node. and as we added one node so length will be set to 1
+    this.head = newNode;
+    this.tail = this.head;
+    this.length = 1;
+  }
+
+  push(value) {
+    //* creating a new node
+    const newNode = new DoublyLinkedListNode(value);
+
+    //* in case , our linked list is empty, we will point both head and tail to the new node
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    }
+    //* right now tail is still pointing to thr previous last node so now this.tail.next which was the previous last node it should point to this new node
+    this.tail.next = newNode;
+    //* at this point we have not moved the tail to the new node , so tail is still pointing to previous last node , so using it we can set newNode.previous property to the previous last node
+    newNode.previous = this.tail;
+    //* now we can move the tail to the new node
+    this.tail = newNode;
+    //* increasing the length
+    this.length++;
+    //* returning the updated linked list
+    return this;
+  }
+
+  pop() {
+    //* in case there is no node we will return undefined
+    if (this.length === 0) {
+      return undefined;
+    }
+    //* in case the linked list only have one node then we just need to set both head and tail to null
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    }
+    //* accessing last node
+    let lastNode = this.tail;
+
+    //* moving the tail to its previous node
+    this.tail = this.tail.previous;
+    //* setting tail.next to null so we can break the connection with the previous last node
+    this.tail.next = null;
+    //* finally in the previous last node we set previous property to null, to also break the connection.
+    lastNode.previous = null;
+    //* decreasing the length
+    this.length--;
+    //* returning the removed node
+    return lastNode;
+  }
+  unshift(value) {
+    //*create a node
+    const newNode = new DoublyLinkedListNode(value);
+    //* in case we don't have any node then we will point both head and tail to this new node
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    }
+    //* this new node's next property should now point to the previous previous first node (this.head)
+    newNode.next = this.head;
+    //* at this point we have not changed this.head so it is still the previous beginning node so , so this previous node will become the second node so its previous property should point to newNode
+    this.head.previous = newNode;
+    //*  moving the head to the newNode
+    this.head = newNode;
+    //* increasing the length
+    this.length++;
+  }
+  shift() {
+    //* in case there is no node we will return undefined
+    if (!this.head) {
+      return undefined;
+    }
+    //* in case the linked list only have one node then we just need to set both head and tail to null
+    if (this.length === 1) {
+      this.head = this.tail = null;
+    }
+    //* selecting the node we will delete
+    let previousStartingNode = this.head;
+    //* moving the head to the next node because at this point the head is still pointing the previous beginning node
+    this.head = this.head.next;
+    //* now after we changed our head to the next node , we have to set it's previous property to null to break the connection with the deleted node
+    this.head.previous = null;
+    //* from the deleted node we will remove the connection by setting its next  property to null;
+    previousStartingNode.next = null;
+    //* decreasing th length
+    this.length--;
+    //* returning the deleted node
+    return previousStartingNode;
+  }
+}
+
+//* push method(to see the image go back to the video)
+//* this method will add one node at the ending
+//* in case , our linked list is empty, we will point both head and tail to the new node
+// if (!this.head) {
+//   this.head = newNode;
+//   this.tail = this.head;
+// }
+//* right now tail is still pointing to thr previous last node so now this.tail.next which was the previous last node it should point to this new node
+// this.tail.next = newNode;
+//* at this point we have not moved the tail to the new node , so tail is still pointing to previous last node , so using it we can set newNode.previous property to the previous last node
+// newNode.previous = this.tail;
+//* now we can move the tail to the new node
+// this.tail = newNode;
+//* increasing the length
+// this.length++
+//* returning the updated linked list
+//   return this;
+
+const myDoublyLinkedList = new DoublyLinkedList(5);
+
+console.log(myDoublyLinkedList.push(9));
+console.log(myDoublyLinkedList.push(11));
+console.log(myDoublyLinkedList.push(12));
+
+//* pop method
+//* to remove thw last node from the linked list
+//* in case there is no node we will return undefined
+// if (this.length === 0) {
+//   return undefined;
+// }
+//* in case the linked list only have one node then we just need to set both head and tail to null
+// if (this.length === 1) {
+//   this.head = null;
+//   this.tail = null;
+// }
+//* accessing last node
+// let lastNode = this.tail;
+
+//* moving the tail to its previous node
+// this.tail = this.tail.previous;
+//* setting tail.next to null so we can break the connection with the previous last node
+// this.tail.next = null;
+//* finally in the previous last node we set previous property to null, to also break the connection.
+// lastNode.previous = null;
+//* decreasing the length
+// this.length--;
+//* returning the removed node
+// return lastNode;
+console.log(myDoublyLinkedList.pop());
+console.log(myDoublyLinkedList);
+//* unshift method
+//* this method will add an node at the beginning of our linked list
+//*create a node
+// const newNode = new DoublyLinkedListNode(value);
+//* in case we don't have any node then we will point both head and tail to this new node
+// if (!this.head) {
+//   this.head = newNode;
+//   this.tail= this.head
+// }
+//* this new node's next property should now point to the previous previous first node (this.head)
+// newNode.next = this.head;
+//* at this point we have not changed this.head so it is still the previous beginning node so , so this previous node will become the second node so its previous property should point to newNode
+// this.head.previous = newNode;
+//*  moving the head to the newNode
+// this.head = newNode;
+//* increasing the length
+// this.length++
+
+//* shift method
+//* this method will remove the first node from the linked list
+//* in case there is no node we will return undefined
+//  if (!this.head) {
+//   return undefined;
+// }
+//* in case the linked list only have one node then we just need to set both head and tail to null
+// if (this.length === 1) {
+//   this.head = this.tail = null;
+// };
+//* selecting the node we will delete
+// let previousStartingNode = this.head;
+//* moving the head to the next node because at this point the head is still pointing the previous beginning node
+// this.head = this.head.next;
+//* now after we changed our head to the next node , we have to set it's previous property to null to break the connection with the deleted node
+// this.head.previous = null;
+//* from the deleted node we will remove the connection by setting its next  property to null;
+// previousStartingNode.next = null;
+//* decreasing th length
+// this.length--;
+//* returning the deleted node
+// return previousStartingNode;
+console.log(myDoublyLinkedList.shift());
+console.log(myDoublyLinkedList);
