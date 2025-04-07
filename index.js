@@ -566,6 +566,30 @@ class LinkedList {
     this.tail = null;
     this.length = 0;
   }
+  reverse() {
+    //* getting the first node
+    let current = this.head;
+    //* reversing head to tail
+    this.head = this.tail;
+    //* reversing tail to head
+    this.tail = current;
+    //* another variable initially pointing to head
+    let next = current;
+    //* another variable pointing to null
+    let prev = null;
+    //* looping the linked list
+    for (let i = 0; i < this.length; i++) {
+      //* moving the next (initially head) to the next node
+      next = current.next;
+      //* changing the arrow direction , current node point to its previous node(null initially) to reverse it.
+      current.next = prev;
+      //* moving the previous node to current node
+      prev = current;
+      //* moving the current node to next node
+      current = next;
+    }
+    return this;
+  }
 }
 const myLinkedList = new LinkedList(1); //* we are passing 1 to set data property value
 // console.log(myLinkedList);
@@ -811,8 +835,9 @@ console.log(myDoublyLinkedList.push(12));
 // this.length--;
 //* returning the removed node
 // return lastNode;
-console.log(myDoublyLinkedList.pop());
-console.log(myDoublyLinkedList);
+
+// console.log(myDoublyLinkedList.pop());
+// console.log(myDoublyLinkedList);
 //* unshift method
 //* this method will add an node at the beginning of our linked list
 //*create a node
@@ -853,5 +878,34 @@ console.log(myDoublyLinkedList);
 // this.length--;
 //* returning the deleted node
 // return previousStartingNode;
-console.log(myDoublyLinkedList.shift());
-console.log(myDoublyLinkedList);
+
+// console.log(myDoublyLinkedList.shift());
+// console.log(myDoublyLinkedList);
+
+//*Reversing a linked list(singly linked list)
+//* first we have to switch the head and tail
+//* reverse the arrows
+
+//* getting the first node
+//  let current = this.head;
+//* reversing head to tail
+//  this.head = this.tail;
+//* reversing tail to head
+//  this.tail = current;
+//* another variable initially pointing to head
+//  let next = current;
+//  * another variable pointing to null
+//  let prev = null;
+//* looping the linked list
+//  for (let i = 0; i < this.length; i++) {
+//* moving the next (initially head) to the next node
+//  next = current.next;
+//* changing the arrow direction , current node point to its previous node(null initially) to reverse it.
+//  current.next = prev;
+//* moving the previous node to current node
+//  prev = current;
+//* moving the current node to next node
+//  current = next;
+//  }
+//  return this;
+console.log(myLinkedList.reverse());
