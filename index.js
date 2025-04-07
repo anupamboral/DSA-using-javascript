@@ -909,3 +909,18 @@ console.log(myDoublyLinkedList.push(12));
 //  }
 //  return this;
 console.log(myLinkedList.reverse());
+
+//? Stack data structure
+//* definition - A stack is a linear data structure  that follows LIFO(Last in first out) principle.
+//* for example think about a stack of books , kept one on another, lets's say we have five books, so stack is just like a box, so get the first book which is at the end , we can't get it directly, first we have to take our the last fifth book because its is on the top. then 4,then3, then 2, and now we can get the first book, that's way we can say it follow the last in first out principle.
+
+//* here we don't have head and tail, instead we have first and last , so the first will point to the last node(like the book on the top). see stacks.png from images folder to understand.
+//* and similar to singly linked list . every node here also contains data and next property.
+//* sot ocreate stack first we have to create nodes .
+//* constructor class for creating nodes
+class {
+  constructor(value) {
+    this.data = value;
+    this.next=null
+  }
+}
