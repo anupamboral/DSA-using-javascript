@@ -807,9 +807,9 @@ class DoublyLinkedList {
 
 const myDoublyLinkedList = new DoublyLinkedList(5);
 
-console.log(myDoublyLinkedList.push(9));
-console.log(myDoublyLinkedList.push(11));
-console.log(myDoublyLinkedList.push(12));
+// console.log(myDoublyLinkedList.push(9));
+// console.log(myDoublyLinkedList.push(11));
+// console.log(myDoublyLinkedList.push(12));
 
 //* pop method
 //* to remove thw last node from the linked list
@@ -874,7 +874,7 @@ console.log(myDoublyLinkedList.push(12));
 // this.head.previous = null;
 //* from the deleted node we will remove the connection by setting its next  property to null;
 // previousStartingNode.next = null;
-//* decreasing th length
+//* decreasing the length
 // this.length--;
 //* returning the deleted node
 // return previousStartingNode;
@@ -908,19 +908,33 @@ console.log(myDoublyLinkedList.push(12));
 //  current = next;
 //  }
 //  return this;
-console.log(myLinkedList.reverse());
+// console.log(myLinkedList.reverse());
 
 //? Stack data structure
 //* definition - A stack is a linear data structure  that follows LIFO(Last in first out) principle.
 //* for example think about a stack of books , kept one on another, lets's say we have five books, so stack is just like a box, so get the first book which is at the end , we can't get it directly, first we have to take our the last fifth book because its is on the top. then 4,then3, then 2, and now we can get the first book, that's way we can say it follow the last in first out principle.
 
-//* here we don't have head and tail, instead we have first and last , so the first will point to the last node(like the book on the top). see stacks.png from images folder to understand.
-//* and similar to singly linked list . every node here also contains data and next property.
-//* sot ocreate stack first we have to create nodes .
+//* here we don't have head and tail, instead we have top/first and bottom/last , so the top will point to the last node(like the book on the top). and the bottom will be the first node.see stacks.png from images folder to understand.
+//* and similar to singly linked list . every node here also contains data and the reference so the next property.
+//* so to create stack first we have to create nodes .
 //* constructor class for creating nodes
-class {
+class StackNode {
   constructor(value) {
     this.data = value;
-    this.next=null
+    this.next = null;
   }
 }
+
+//* constructor class to create stack
+class Stack {
+  constructor(value) {
+    //* creating new node
+    const newNode = new StackNode(value);
+    //* set the first node value to this newNode
+    this.first = newNode;
+    //* setting the length to 1
+    this.length = 1;
+  }
+}
+const theStack = new Stack(3);
+console.log(theStack);
