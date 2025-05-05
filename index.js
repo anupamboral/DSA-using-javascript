@@ -935,6 +935,80 @@ class Stack {
     //* setting the length to 1
     this.length = 1;
   }
+  push(value) {
+    //* creating a new node
+    const newNode = new StackNode(value);
+    //* in case our stack is empty (there is no node then we will simply set this.first to this new node)
+    if (this.length === 0) {
+      this.first = newNode;
+    }
+    //* if there is already one or more than one nodes present in the stack
+    //* at this point this.first is still pointing to the previous node , so we will use it to set newNode's next property
+    newNode.next = this.first;
+    //* now this newNode will become the first node
+    this.first = newNode;
+    //* increasing the length
+    this.length++;
+    //* returning the updated stack(here this is pointing to the Stack class)
+    return this;
+  }
+  pop() {
+    //* creating current variable to keep track of the previous first node
+    const current = this.first;
+    //* in case there is only one node present in the stack
+    if (this.length === 1) {
+      this.first = null;
+    }
+    //*  moving first property to the next node as we are removing the previous first node
+    this.first = current.next;
+    //* as we are removing the previous node so we will remove the reference of the next node from the previous first node
+    current.next = null;
+    //* decreasing the length
+    this.length--;
+    //* returning the removed node
+    return current;
+  }
 }
+//* creating a stack instance using our Stack constructor class
 const theStack = new Stack(3);
+// console.log(theStack);
+//* push method (pushing new node in the stack)
+//* see the problem and image description in the video (time stamp - stack push method)
+//* creating a new node
+// const newNode = new StackNode(value);
+//* in case our stack is empty (there is no node then we will simply set this.first to this new node)
+// if (this.length === 0) {
+// this.first = newNode;
+// return this;
+// }
+//* if there is already one or more than one nodes present in the stack
+//* at this point this.first is still pointing to the previous node , so we will use it to set newNode's next property
+// newNode.next = this.first;
+//* now this newNode will become the first node
+// this.first = newNode;
+//* increasing the length
+// this.length++;
+//* returning the updated stack(here this is pointing to the Stack class)
+// return this;
+
+theStack.push(4);
+theStack.push(5);
+console.log(theStack.push(6));
+
+//* pop method (to remove the top node)
+//* creating current variable to keep track of the previous first node
+// const current = this.first;
+//* in case there is only one node present in the stack
+// if (this.length === 1) {
+// this.first = null;
+// }
+//*  moving first property to the next node as we are removing the previous first node
+// this.first = current.next;
+//* as we are removing the previous node so we will remove the reference of the next node from the previous first node
+// current.next = null;
+//* decreasing the length
+// this.length--;
+//* returning the removed node
+// return current;
+console.log(theStack.pop());
 console.log(theStack);
