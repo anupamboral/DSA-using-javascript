@@ -955,6 +955,8 @@ class Stack {
   pop() {
     //* creating current variable to keep track of the previous first node
     const current = this.first;
+    //* in case stack is empty we will return undefined
+    if (this.length === 0) return undefined;
     //* in case there is only one node present in the stack
     if (this.length === 1) {
       this.first = null;
@@ -998,6 +1000,8 @@ console.log(theStack.push(6));
 //* pop method (to remove the top node)
 //* creating current variable to keep track of the previous first node
 // const current = this.first;
+//* in case stack is empty we will return undefined
+// if (this.length === 0) return undefined;
 //* in case there is only one node present in the stack
 // if (this.length === 1) {
 // this.first = null;
@@ -1012,3 +1016,78 @@ console.log(theStack.push(6));
 // return current;
 console.log(theStack.pop());
 console.log(theStack);
+
+//*? Queue Data Structure
+//* A queue is a linear data structure that functions like a waiting line.It follows the fifo (first in first out) principal, meaning the element that enters the queue first will be the first one to be removed. this data structure look very similar to the linked list. it has nodes , every node has data and next property. and instead of head we have first and instead of tail we have last property inside queue.
+//* For example 4 people are entering in a shop to buy some coffee the person who enters first will be first in the queue and by the drink first then come out of the store then the second person who entered he will buy the coffee then come out of the store and so on S basically they are following the first in first out principle so the person who is going first inside the same person will be come out first so this Queue is basically the opposite of stack because stack  follow the lifo principle but Queue is following the Fifo principle.
+//* see image -(queue.png)
+//* node constructor class for queue
+class QueueNode {
+  constructor(value) {
+    this.data = value;
+    this.next = null;
+  }
+}
+
+//* queue constructor class
+class Queue {
+  constructor(value) {
+    const node = new QueueNode(value);
+    //* initially both first and the last node point to the same newNode
+    this.first = node;
+    this.last = node;
+    this.length = 1;
+  }
+
+  enqueue(value) {
+    //* creating a new node
+    const newNode = new QueueNode(value);
+    //* in case , the queue is initially empty
+    if (this.length === 0) {
+      this.first = newNode;
+      this.last = newNode;
+    }
+    //* when there is one or more nodes present
+    //* at this point last property still pointing to the previous last node, so noe the previous last node should point to this new node.
+    this.last.next = newNode;
+    //* moving last property to this new node
+    this.last = newNode;
+    //* this new node's next property should point towards null
+    this.last.next = null;
+    //* increasing the length
+    this.length++;
+    //* returning queue
+    return this;
+  }
+  dequeue() {}
+}
+
+//* creating the a queue instance
+const myQueue = new Queue(3);
+console.log(myQueue);
+
+//* enqueue
+//* it is same as we push a new node in linked list(for reference we can see the image -(push method linked-list.png))
+//* creating a new node
+// const newNode = new QueueNode(value);
+//* in case , the queue is initially empty
+// if (this.length === 0) {
+// this.first = newNode;
+// this.last = newNode;
+// }
+//* when there is one or more nodes present
+//* at this point last property still pointing to the previous last node, so noe the previous last node should point to this new node.
+// this.last.next = newNode;
+//* moving last property to this new node
+// this.last = newNode;
+//* this new node's next property should point towards null
+// this.last.next = null;
+//* increasing the length
+// this.length++;
+//* returning queue
+// return this;
+console.log(myQueue.enqueue(4));
+console.log(myQueue.enqueue(5));
+
+//* dequeue
+//* similar to pop method of linked list
