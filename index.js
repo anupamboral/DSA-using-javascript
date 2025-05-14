@@ -416,7 +416,13 @@ class LinkedList {
 
   pop() {
     //* initially if there is no node inside the Linked List we will return undefined;
-    if (!this.head) return null; //* though we should have a node initially because of the linked list constructor class which already sets the first node.
+    if (!this.head) return undefined; //* though we should have a node initially because of the linked list constructor class which already sets the first node.
+
+    //* if we only had one node then as this method removes last node , so that one node will be also deleted, that's why we will set both head and tail equals to null
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
 
     let current = this.head;
     let previous = this.head;
@@ -434,11 +440,6 @@ class LinkedList {
     //* decreasing the length
     this.length--;
 
-    //* if we only had one node then as this method removes last node , so that one node will be also deleted, that's why we will set both head and tail equals to null
-    if (this.length === 0) {
-      this.head = null;
-      this.tail = null;
-    }
     //* returning the current variable to see what node we removed
     return current;
   }
@@ -970,6 +971,28 @@ class Stack {
     //* returning the removed node
     return current;
   }
+
+  minValue() {
+    //* if the stack is empty then it will return undefined
+    if (this.length === 0) return undefined;
+
+    //* to track the minimum value wew ill create two variables , first is current ,it is initially set to this.first and second is minValue and its initial value is current.data(this.first)
+    let current = this.first;
+    let minValue = current.data;
+
+    //* we will iterate the stack till current.next value is null(which happens at the end)
+    while (current.next) {
+      //* in each iteration we are setting current to its next node
+      current = current.next;
+      //* here we are checking if the current node's value is lower than the minValue(initially set to this.first/current.data) and if it is lower then we are setting minValue to current.data(the new minimum value)
+      if (current.data < minValue) {
+        console.log(current.data, minValue);
+        minValue = current.data;
+      }
+    }
+    //* returning the minimum value
+    return minValue;
+  }
 }
 //* creating a stack instance using our Stack constructor class
 const theStack = new Stack(3);
@@ -1017,7 +1040,30 @@ console.log(theStack.push(6));
 console.log(theStack.pop());
 console.log(theStack);
 
-//*? Queue Data Structure
+//* minValue method(at 3.9.36 sec)
+//* this method will help to find the minimum value among the nodes from the stack
+//* if the stack is empty then it will return undefined
+// if (this.length === 0) return undefined;
+
+//* to track the minimum value wew ill create two variables , first is current ,it is initially set to this.first and second is minValue and its initial value is current.data(this.first)
+// let current = this.first;
+// let minValue = current.data;
+
+//* we will iterate the stack till current.next value is null(which happens at the end)
+// while (current.next) {
+//* in each iteration we are setting current to its next node
+// current = current.next;
+//* here we are checking if the current node's value is lower than the minValue(initially set to this.first/current.data) and if it is lower then we are setting minValue to current.data(the new minimum value)
+// if (current.data < minValue) {
+// console.log(current.data, minValue);
+// minValue = current.data;
+// }
+// }
+//* returning the minimum value
+// return minValue;
+console.log(theStack.minValue());
+
+ //*? Queue Data Structure
 //* A queue is a linear data structure that functions like a waiting line.It follows the fifo (first in first out) principal, meaning the element that enters the queue first will be the first one to be removed. this data structure look very similar to the linked list. it has nodes , every node has data and next property. and instead of head we have first and instead of tail we have last property inside queue.
 //* For example 4 people are entering in a shop to buy some coffee the person who enters first will be first in the queue and by the drink first then come out of the store then the second person who entered he will buy the coffee then come out of the store and so on S basically they are following the first in first out principle so the person who is going first inside the same person will be come out first so this Queue is basically the opposite of stack because stack  follow the lifo principle but Queue is following the Fifo principle.
 //* see image -(queue.png)
@@ -1059,7 +1105,35 @@ class Queue {
     //* returning queue
     return this;
   }
-  dequeue() {}
+  dequeue() {
+    //* initially if there is no node inside the Linked List we will return undefined;
+    if (!this.first) return undefined; //* though we should have a node initially because of the linked list constructor class which already sets the first node.
+
+    //* if we only had one node then as this method removes last node , so that one node will be also deleted, that's why we will set both head and tail equals to null
+    if (this.length === 0) {
+      this.first = null;
+      this.last = null;
+    }
+
+    let current = this.first;
+    let previous = this.first;
+
+    //* this loop should run until we find the node which next property pointing to null; so below loop will run until our below loops current property reaches to the tail(last) node
+    while (current.next) {
+      //* at this point current and previous both pointing to first, in each iteration we are moving the previous variable at the current node position  and then moving the current variable to next node.
+      previous = current;
+      //* moving current variable to next node
+      current = previous.next;
+    }
+    //* at this point our current is reached to the last node because of the above loop and previous is at one node before the last one, now we will set the tail node to this previous variable as we want to delete the last node, so we will shift the tail to this previous and also remove the reference of the last node from this new tail node, so now the linked list will no longer have the last node as we moved the tail to its previous node and also set the next property reference to null so it does not contain the reference of that last node.
+    this.last = previous;
+    this.last.next = null;
+    //* decreasing the length
+    this.length--;
+
+    //* returning the current variable to see what node we removed
+    return current;
+  }
 }
 
 //* creating the a queue instance
@@ -1081,7 +1155,7 @@ console.log(myQueue);
 //* moving last property to this new node
 // this.last = newNode;
 //* this new node's next property should point towards null
-// this.last.next = null;
+// this.last.next = null;1
 //* increasing the length
 // this.length++;
 //* returning queue
@@ -1091,3 +1165,32 @@ console.log(myQueue.enqueue(5));
 
 //* dequeue
 //* similar to pop method of linked list
+//* initially if there is no node inside the Linked List we will return undefined;
+// if (!this.first) return undefined; //* though we should have a node initially because of the linked list constructor class which already sets the first node.
+
+//* if we only had one node then as this method removes last node , so that one node will be also deleted, that's why we will set both head and tail equals to null
+// if (this.length === 0) {
+// this.first = null;
+// this.last = null;
+// }
+//
+// let current = this.first;
+// let previous = this.first;
+
+//* this loop should run until we find the node which next property pointing to null; so below loop will run until our below loops current property reaches to the tail(last) node
+// while (current.next) {
+//* at this point current and previous both pointing to first, in each iteration we are moving the previous variable at the current node position  and then moving the current variable to next node.
+// previous = current;
+//* moving current variable to next node
+// current = previous.next;
+// }
+//* at this point our current is reached to the last node because of the above loop and previous is at one node before the last one, now we will set the tail node to this previous variable as we want to delete the last node, so we will shift the tail to this previous and also remove the reference of the last node from this new tail node, so now the linked list will no longer have the last node as we moved the tail to its previous node and also set the next property reference to null so it does not contain the reference of that last node.
+// this.last = previous;
+// this.last.next = null;
+//* decreasing the length
+// this.length--;
+
+//* returning the current variable to see what node we removed
+// return current;
+console.log(myQueue.dequeue());
+console.log(myQueue);
