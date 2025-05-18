@@ -1063,7 +1063,7 @@ console.log(theStack);
 // return minValue;
 console.log(theStack.minValue());
 
- //*? Queue Data Structure
+//*? Queue Data Structure
 //* A queue is a linear data structure that functions like a waiting line.It follows the fifo (first in first out) principal, meaning the element that enters the queue first will be the first one to be removed. this data structure look very similar to the linked list. it has nodes , every node has data and next property. and instead of head we have first and instead of tail we have last property inside queue.
 //* For example 4 people are entering in a shop to buy some coffee the person who enters first will be first in the queue and by the drink first then come out of the store then the second person who entered he will buy the coffee then come out of the store and so on S basically they are following the first in first out principle so the person who is going first inside the same person will be come out first so this Queue is basically the opposite of stack because stack  follow the lifo principle but Queue is following the Fifo principle.
 //* see image -(queue.png)
@@ -1194,3 +1194,60 @@ console.log(myQueue.enqueue(5));
 // return current;
 console.log(myQueue.dequeue());
 console.log(myQueue);
+
+//* isValidParenthesis method
+//* this method will take some input like "()","{}","[]", "(){}[]","(]](", and tell us if writing parenthesis is right or wrong..
+const isValidParenthesis = (str) => {
+  //* creating our own stack using [] because it has all of the necessary methods like push ,pop.
+  const stack = [];
+  //* we will use this stack to store opening brackets only
+  //* in the below bracket object we have written the right pattern we want
+  const brackets = {
+    "(": ")",
+    "[": "]",
+    "{": "}",
+  };
+  //* now are iterating all of the characters we are receiving as arguments
+  for (let char of str) {
+    //* here we are checking if it is the opening brackets then we will push only that opening bracket into the stack
+    if (brackets[char]) {
+      stack.push(char);
+    } else {
+      //* if it is a closing bracket we have check if it matches the top of the stack
+      //* stack.pop give us the top of the stack
+      const top = stack.pop();
+      //* if it is not the opening or closing then we will return false
+      if (!top || brackets[top] !== char) {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+};
+console.log(isValidParenthesis("()")); //* true
+console.log(isValidParenthesis("{}")); //* true
+console.log(isValidParenthesis("{()}")); //* true
+console.log(isValidParenthesis("{(}]")); //* false
+console.log(isValidParenthesis("{}()[]")); //* true
+console.log(isValidParenthesis("{)[]")); //* false
+
+//* reversing string using stack
+
+function reverseString(str) {
+  //* creating a stack
+  const stack = [];
+  //* iterating the received input's characters and and then one by one into the stack
+  for (let char of str) {
+    stack.push(char);
+  }
+  //* variable to sto9re the reversed string
+  let reversedString = "";
+
+  //* if stacks length is more than 0 then we will pop characters from the stack and one by one ad then into the the reversedString variable
+  while (stack.length > 0) {
+    reversedString += stack.pop();
+  }
+  //* returning the reversed string
+  return reversedString;
+}
+console.log(reverseString("anupam")); //*mapuna
