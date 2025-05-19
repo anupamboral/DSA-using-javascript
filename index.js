@@ -1243,7 +1243,7 @@ function reverseString(str) {
   //* variable to sto9re the reversed string
   let reversedString = "";
 
-  //* if stacks length is more than 0 then we will pop characters from the stack and one by one ad then into the the reversedString variable
+  //* if stacks length is more than 0 then we will pop characters from the stack and one by one add then into the the reversedString variable
   while (stack.length > 0) {
     reversedString += stack.pop();
   }
@@ -1251,3 +1251,55 @@ function reverseString(str) {
   return reversedString;
 }
 console.log(reverseString("anupam")); //*mapuna
+
+//? Hash Tables
+//* hash tables use to store key-value pairs
+//* like in javascript, we have key-value pairs in objects
+//* but we will not use this built in objects as hash tables instead we will make our own hash table
+
+//* suppose we want to store a phone numbers in hash tables.
+//* like - john: 3432434423, alex:4353243443,luci:93247908347
+
+//* to solve this problem and create our own hash table we will be using "hash functions"
+//* Hash function : Acts like a translator, taking an input of any size(key) and converting it into a fixed-size value (hash code) that can be used as an index within the hash tables's internal array .This process of mapping arbitrary keys to fixed-length indices is called hashing.
+
+//* to understand the above hash function working process in more detail we can understand it step by step we can see below (not necessary to to remember below one above definition is enough, it is just for better understanding)
+//*1  input- you feed any kind of data into the hash function, like your name,a sentence,or a whole file.
+
+//*2 hashing process - the function performs series of mathematical operations on the input data, essentially scrambling it up in a unique way.
+
+//*3 fixed-size input- regardless of input size, the hash function always spits out a fixed-size value, like a short string of characters or a number.
+
+//* actual process of how hash function put the data into hash table(see image -hash table.png)
+//* first it takes some data as input like john:367587687 ,we also call this input as key, so first it will give the key a unique identifier/index like 2 , which is basically the location to store the data. then at second step it puts the data(key) inside [[]] double brackets like [[ john:367587687]] then put this key at the second index inside the hash table.(see image hash table.png)
+
+//* let's create our own hash table using class
+
+class HashTable {
+  constructor(size = 5) {
+    this.keyMap = new Array(size); //* this.kepMap property's value is new Array because we are converting our data into array and also we are passing the size .and we have also provided the default value 5 for size.
+  }
+
+  //* our hash function
+
+  _hashFunction(key) {
+    //* this function will take the key as input and this function will hash it
+    let sum = 0; //*this variable is for storing the hash value
+
+    //* for prime number
+    const PRIME_NUMBER = 31;
+    //* it will iterate thorough each character of the key(param) but only upto the maximum of 100 characters . this is for ensuring that the function don't take much longe keys
+    for (let i = 0; i < Math.min(key.length, 100); i++) {
+      //  *     The code const charCode = key.charCodeAt(0) - 96; converts a lowercase letter to its corresponding position in the alphabet (1-26). It works by:
+      //* key.charCodeAt(0):
+      // This part retrieves the Unicode (UTF-16) value of the character at index 0 of the string key. If key is a single lowercase letter, this will return its Unicode value. For example, the Unicode value of 'a' is 97, 'b' is 98, and so on.
+      //* - 96:
+      //* This subtracts 96 from the Unicode value. Since 'a' has a Unicode value of 97, subtracting 96 results in 1. Similarly, 'b' (Unicode 98) becomes 2, and so on. This effectively maps 'a' to 1, 'b' to 2, ..., 'z' to 26.
+      //* Therefore, after execution, charCode will hold the numerical position of the lowercase letter within the alphabet. If key is not a lowercase letter, the result might not be meaningful in this context.
+      const charCode = key.charCodeAt(0) - 96;
+      //* hashing logic(to know more just search below code in google)
+      sum = (sum * PRIME_NUMBER + charCode) % this.keyMap.length;
+    }
+    return sum;
+  }
+}
