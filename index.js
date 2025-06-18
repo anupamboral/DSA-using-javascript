@@ -1260,7 +1260,7 @@ console.log(reverseString("anupam")); //*mapuna
 //* suppose we want to store a phone numbers in hash tables.
 //* like - john: 3432434423, alex:4353243443,luci:93247908347
 
-//* to solve this problem and create our own hash table we will be using "hash functions"
+//* to solve this problem and to create our own hash table we will be using "hash functions"
 //* Hash function : Acts like a translator, taking an input of any size(key) and converting it into a fixed-size value (hash code) that can be used as an index within the hash tables's internal array .This process of mapping arbitrary keys to fixed-length indices is called hashing.
 
 //* to understand the above hash function working process in more detail we can understand it step by step we can see below (not necessary to to remember below one above definition is enough, it is just for better understanding)
@@ -1302,4 +1302,20 @@ class HashTable {
     }
     return sum;
   }
+  set(key, value) {
+    const index = this._hashFunction(key); //* this will return the index
+    console.log(index);
+    console.log(!this.keyMap[index]); //* we will get true because there is no empty array already available inside that specific index.
+
+    //* so if there is no empty array in that specific index then we will create an empty array.
+    if (!this.keyMap[index]) this.keyMap[index] = [];
+    //* if there is already an array then we just need to push our data(key and ,value) to that specific index
+    this.keyMap[index].push([key, value]);
+    return this;
+  }
 }
+//* set method
+//* Now let's create set method in our hash table ,it will first take the key and its value and put that into the hash function then hash function will give some id of index,then inside the hash table we will go to that index, and check if some kind array already present at that index or not, if any array is present then inside that array we will put our data and if there is no array then we will just create two array[[]] one inside another then put our data inside that.
+
+const phoneBook = new HashTable(); //* creating an instance
+console.log(phoneBook.set("hi", 798089898));
