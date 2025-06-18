@@ -1313,9 +1313,33 @@ class HashTable {
     this.keyMap[index].push([key, value]);
     return this;
   }
+  get(key) {
+    //* using the key first we will get the index
+    const index = this._hashFunction(key);
+
+    //* then we will check if any data present in that specific index or not inside the hash table.
+    if (this.keyMap[index]) {
+      //* if any data is present in that specific index then we will iterate that data
+      for (let i = 0; i < this.keyMap[index].length; i++) {
+        //* if the the data is present in that specific index, then we will try to find the matching key,so data inside that inside should look like this([[john,2321313],[harry,4356436]]), below first to go to that specific index we are writing this.keyMap[index] then as we are iterating the array and accessing each index(each array inside the array) that why we are writing this.keyMap[index][i] , and then inside the child array we are trying to find the key like-john that why are finding the 0 th index,like this - this.keyMap[index][i][0], and finally we are comparing it with the received key.
+        if (this.keyMap[index][i][0] === key) {
+          //* if both matches then we will just return the value of the key located at the first index.
+          return this.keyMap[index][i][1];
+        }
+      }
+    }
+    //* if no data is present inside that specific index then we will just return undefined
+    return undefined;
+  }
 }
 //* set method
 //* Now let's create set method in our hash table ,it will first take the key and its value and put that into the hash function then hash function will give some id of index,then inside the hash table we will go to that index, and check if some kind array already present at that index or not, if any array is present then inside that array we will put our data and if there is no array then we will just create two array[[]] one inside another then put our data inside that.
 
 const phoneBook = new HashTable(); //* creating an instance
-console.log(phoneBook.set("hi", 798089898));
+console.log(phoneBook.set("john", 798089898));
+
+//* get method
+//* this method will take an property and hash that after hashing it will give an index based on theta property, then inside then inside hash table we will go to that index, and check if any data already present in that index or not, if present then we will just iterate that data(array of arrays) like-```[[john,2321313],[harry,4356436]]``` and if we get the key matching to the property we are trying to find then we will just return the key's value, but if we don't have any data in that index then we will return just undefined.
+
+console.log(phoneBook.get("john")); //* it will give us the john's number
+console.log(phoneBook.get("shawn")); //*undefined, because it is not present inside our hashTable's instance.
