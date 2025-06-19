@@ -1331,15 +1331,37 @@ class HashTable {
     //* if no data is present inside that specific index then we will just return undefined
     return undefined;
   }
+
+  getAllKeys() {
+    const keys = []; //* container for storing all the keys
+
+    //* iterating the hash table and checking if there is in data in any index or not
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        //* iterating the array data
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          //* pushing every key data into keys array container
+          keys.push(this.keyMap[i][j][0]);
+        }
+      }
+    }
+    return keys;
+  }
 }
 //* set method
 //* Now let's create set method in our hash table ,it will first take the key and its value and put that into the hash function then hash function will give some id of index,then inside the hash table we will go to that index, and check if some kind array already present at that index or not, if any array is present then inside that array we will put our data and if there is no array then we will just create two array[[]] one inside another then put our data inside that.
 
 const phoneBook = new HashTable(); //* creating an instance
 console.log(phoneBook.set("john", 798089898));
-
+phoneBook.set("nobita", 5675766889);
+phoneBook.set("anupam", 7904759099);
 //* get method
 //* this method will take an property and hash that after hashing it will give an index based on theta property, then inside then inside hash table we will go to that index, and check if any data already present in that index or not, if present then we will just iterate that data(array of arrays) like-```[[john,2321313],[harry,4356436]]``` and if we get the key matching to the property we are trying to find then we will just return the key's value, but if we don't have any data in that index then we will return just undefined.
 
 console.log(phoneBook.get("john")); //* it will give us the john's number
 console.log(phoneBook.get("shawn")); //*undefined, because it is not present inside our hashTable's instance.
+
+//* getAllKeys method
+//* it will give us all the keys from the hash table.
+//* first we will iterate the whole table and check each index if any data present or not.when we find any index where any data is present then, from that index , we will iterate the array of array, then from each of the child array we will get all of the keys and store copy in another array and finally return that.so we can get all the keys from the hash table.
+console.log(phoneBook.getAllKeys()); //*["john","nobita","anupam"]
