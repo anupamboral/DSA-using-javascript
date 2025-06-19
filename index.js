@@ -1335,17 +1335,34 @@ class HashTable {
   getAllKeys() {
     const keys = []; //* container for storing all the keys
 
-    //* iterating the hash table and checking if there is in data in any index or not
+    //* iterating the hash table
     for (let i = 0; i < this.keyMap.length; i++) {
+      //*checking if there any in data in any index or not
       if (this.keyMap[i]) {
-        //* iterating the array data
+        //* iterating the parent array data
         for (let j = 0; j < this.keyMap[i].length; j++) {
           //* pushing every key data into keys array container
-          keys.push(this.keyMap[i][j][0]);
+          keys.push(this.keyMap[i][j][0]); //* keyMap[i] to access index inside hash table , the [j] to access child arrays inside parent array, then [0] to access the keys inside the child arrays
         }
       }
     }
     return keys;
+  }
+  getAllValues() {
+    const values = []; //* container for storing values
+
+    //* iterating the hash table  checking if there is in data in any index or not
+    for (let i = 0; i < this.keyMap.length; i++) {
+      //*checking if there is any data in any index or not
+      if (this.keyMap[i]) {
+        //* iterating the parent array
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          //* pushing all the values of the the keys into the values array
+          values.push(this.keyMap[i][j][1]); //* keyMap[i] to access index inside hash table , the [j] to access child arrays inside parent array, then [1] to access the values of the keys inside the child arrays
+        }
+      }
+    }
+    return values;
   }
 }
 //* set method
@@ -1363,5 +1380,9 @@ console.log(phoneBook.get("shawn")); //*undefined, because it is not present ins
 
 //* getAllKeys method
 //* it will give us all the keys from the hash table.
-//* first we will iterate the whole table and check each index if any data present or not.when we find any index where any data is present then, from that index , we will iterate the array of array, then from each of the child array we will get all of the keys and store copy in another array and finally return that.so we can get all the keys from the hash table.
+//* first we will iterate the whole hash table and check each index if any data present or not.when we find any index where any data is present then, from that index , we will iterate the array of array, then from each of the child array we will get all of the keys and store  in another array and finally return that.so we can get all the keys from the hash table.
 console.log(phoneBook.getAllKeys()); //*["john","nobita","anupam"]
+
+//* getAllValues method
+//* it will give us all the values of the keys from the hash table.
+//* first we will iterate the whole hash table and check each index if any data present or not.when we find any index where any data is present then, from that index , we will iterate the parent array of arrays, then from each of the child array we will get all of the values  of the keys and store in another array and finally return that.so we can get all the values of the keys from the hash table.
