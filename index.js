@@ -1364,6 +1364,22 @@ class HashTable {
     }
     return values;
   }
+  getAllKeyValuePairs() {
+    const keyValuePairs = []; //* container for storing keyValuePairs
+
+    //* iterating the hash table  checking if there is in data in any index or not
+    for (let i = 0; i < this.keyMap.length; i++) {
+      //*checking if there is any data in any index or not
+      if (this.keyMap[i]) {
+        //* iterating the parent array
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          //* pushing all the keyValuePairs into the keyValuePairs array
+          keyValuePairs.push(this.keyMap[i][j]); //* keyMap[i] to access index inside hash table , the [j] to access child arrays of keyValuePairs inside parent array,
+        }
+      }
+    }
+    return keyValuePairs;
+  }
 }
 //* set method
 //* Now let's create set method in our hash table ,it will first take the key and its value and put that into the hash function then hash function will give some id of index,then inside the hash table we will go to that index, and check if some kind array already present at that index or not, if any array is present then inside that array we will put our data and if there is no array then we will just create two array[[]] one inside another then put our data inside that.
@@ -1386,3 +1402,9 @@ console.log(phoneBook.getAllKeys()); //*["john","nobita","anupam"]
 //* getAllValues method
 //* it will give us all the values of the keys from the hash table.
 //* first we will iterate the whole hash table and check each index if any data present or not.when we find any index where any data is present then, from that index , we will iterate the parent array of arrays, then from each of the child array we will get all of the values  of the keys and store in another array and finally return that.so we can get all the values of the keys from the hash table.
+console.log(phoneBook.getAllValues());
+
+//* keyValuePairs method
+//* it will give us all the keyValuePairs from the hash table.
+//* first we will iterate the whole hash table and check each index if any data present or not.when we find any index where any data is present then, from that index , we will iterate the parent array of arrays, and each iteration will give the child arrays which are keyValuePairs, we will push those child arrays into keyValuePairs array.and return that keyValuePairs array.
+console.log(phoneBook.getAllKeyValuePairs());
