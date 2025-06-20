@@ -1273,15 +1273,14 @@ console.log(reverseString("anupam")); //*mapuna
 //* actual process of how hash function put the data into hash table(see image -hash table.png)
 //* first it takes some data as input like john:367587687 ,we also call this input as key, so first it will give the key a unique identifier/index like 2 , which is basically the location to store the data. then at second step it puts the data(key) inside [[]] double brackets like [[ john:367587687]] then put this key at the second index inside the hash table.(see image hash table.png)
 
-//* let's create our own hash table using class
+//* let's create our own custom hash table using class
 
 class HashTable {
   constructor(size = 5) {
     this.keyMap = new Array(size); //* this.kepMap property's value is new Array because we are converting our data into array and also we are passing the size .and we have also provided the default value 5 for size.
   }
 
-  //* our hash function
-
+  //* custom hash function
   _hashFunction(key) {
     //* this function will take the key as input and this function will hash it
     let sum = 0; //*this variable is for storing the hash value
@@ -1408,3 +1407,34 @@ console.log(phoneBook.getAllValues());
 //* it will give us all the keyValuePairs from the hash table.
 //* first we will iterate the whole hash table and check each index if any data present or not.when we find any index where any data is present then, from that index , we will iterate the parent array of arrays, and each iteration will give the child arrays which are keyValuePairs, we will push those child arrays into keyValuePairs array.and return that keyValuePairs array.
 console.log(phoneBook.getAllKeyValuePairs());
+
+//* wordCounter function
+//* this function will take a sentence as parameter like "Hello my name name name is anupam" and tell us that how many times a specific word is written.like-{hello:1,my:1,name:3,is:1,anupam:1};
+
+function wordCounter(text) {
+  const lowerText = text.toLowerCase(); //* converting text to lower case
+
+  //* hash table/object for saving the results
+  const wordMap = {};
+
+  const words = lowerText.split(" "); //* splitting based on sapc\space
+
+  //* iterating words array
+  for (const word of words) {
+    //* checking if any word is already present inside the wordMap or not
+    if (word in wordMap) {
+      //*if any word is already present inside the wordMap then we will just increase the count by 1
+      wordMap[word]++;
+    } else {
+      //* if the word is not present then we will for adding first one we will set the count to 1.
+      wordMap[word] = 1;
+    }
+  }
+  return wordMap;
+}
+console.log(wordCounter("Hello my name name name is anupam")); //* name :3, another words :1
+
+//* two sum refactor problem was not understandable.3h.50m
+
+//? Tree data structure
+//* A DS tree is a fundamental hierarchical data structure. it represents a collection of elements(data) called nodes,connected by edges(links),forming a tree like structure.(see image - Tree data structure.png)
