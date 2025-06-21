@@ -1438,3 +1438,9 @@ console.log(wordCounter("Hello my name name name is anupam")); //* name :3, anot
 
 //? Tree data structure
 //* A DS tree is a fundamental hierarchical data structure. it represents a collection of elements(data) called nodes,connected by edges(links),forming a tree like structure.(see image - Tree data structure.png)
+
+//*root node -  the top node of all nodes is called root node,
+// * parent node- any parent of child nodes is called parent node,
+//*sibling node - two children at same level are called sibling nodes of each other,
+//*leaf node-  if any children node doesn't have further children of them then those children nodes are called leaf nodes
+//* full tree - when each node either has no children(leaf node) or exactly two children.(see image- full tree)
