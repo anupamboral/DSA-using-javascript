@@ -1449,3 +1449,9 @@ console.log(wordCounter("Hello my name name name is anupam")); //* name :3, anot
 //* Complete tree
 //*almost full levels - all levels excepts possibly the last one are completely filled with nodes.
 //* left leaning last level:- the last level is filled with nodes from the left side as much as possible.(see image - complete tree)
+
+//*? Binary search tree(BST)
+//* A binary search tree is a special kind of binary tree used to organize data in a sorted way.It works like a filling cabinet where you can efficiently search, add , remove items.
+
+//* important note while working with binary search tree
+//* go left if you value is smaller than the current branch. Go right if your value is bigger.( to under stand better watch the video at 3 h 56 m)
