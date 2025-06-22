@@ -1444,3 +1444,8 @@ console.log(wordCounter("Hello my name name name is anupam")); //* name :3, anot
 //*sibling node - two children at same level are called sibling nodes of each other,
 //*leaf node-  if any children node doesn't have further children of them then those children nodes are called leaf nodes
 //* full tree - when each node either has no children(leaf node) or exactly two children.(see image- full tree)
+//* perfect tree(full + balance)
+//* all the leaf nodes are at the same depth(distance from the root).this means the tree is completely filled with no gaps at any level.(see image - perfect tree)
+//* Complete tree
+//*almost full levels - all levels excepts possibly the last one are completely filled with nodes.
+//* left leaning last level:- the last level is filled with nodes from the left side as much as possible.(see image - complete tree)
