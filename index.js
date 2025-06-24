@@ -1455,3 +1455,79 @@ console.log(wordCounter("Hello my name name name is anupam")); //* name :3, anot
 
 //* important note while working with binary search tree
 //* go left if you value is smaller than the current branch. Go right if your value is bigger.( to under stand better watch the video at 3 h 56 m)
+
+//* node creator class
+class BSTNode {
+  constructor(value) {
+    this.value = value; //* value /data of the node
+    //* each node can have two pointer left and right so initially we will set them to null
+    this.left = null;
+    this.right = null;
+  }
+}
+//* BST creator class
+class BST {
+  constructor() {
+    //* inside the BST ,first  we have the root at the top level, initially we will set it to null
+    this.root = null;
+  }
+  insert(value) {
+    //* creating new new node
+    const newNode = new BSTNode(value);
+
+    //* initially we set root node's value to null, so now first we will set the root's value to this newNode if root's value is null
+    if (this.root === null) {
+      this.root = newNode;
+      return this; //* in this case , the received value is used to create the root node so we can immediately return
+    }
+
+    //* creating a temporary variable to keep track of the root node
+    let temp = this.root;
+    // console.log(temp.value);
+    //* we are using the while loop and true value inside the condition because we don't know how many time we will use this insert method and how many nodes we will insert using this.
+    while (true) {
+      //* if newNode's value and temp's(root node) value is same then there is no meaning of adding that value because that value will b a duplicate so we will return undefined in that case.
+      if (newNode.value === temp.value) {
+        return undefined;
+      }
+
+      //* now we will check if newNode's value is less than root node, then according to the rule , we should add the newNode at the left pointer
+      if (newNode.value < temp.value) {
+        //* then first we have to check the left pointer is empty or not , if it is empty that means it is null
+        if (temp.left === null) {
+          temp.left = newNode;
+          //* returning the BST
+          return this;
+        } else {
+          //* finally that is not the case so if the left pointer is not empty then we will set temp's value to temp.left (left pointer)
+          temp = temp.left;
+        }
+      } else {
+        //* in this case newNode's value will be more than the root node so it should be added to the right pointer
+        //* first we will check if the right pointer is empty
+        if (temp.right === null) {
+          temp.right = newNode;
+          return this; //*returning the BST
+        } else {
+          //* finally that is not the case so if the right pointer is not empty then we will set temp's value to this.right (right pointer)
+          temp = temp.right;
+        }
+      }
+    }
+  }
+}
+
+//* creating a instance of our BST m
+const tree = new BST();
+
+tree.insert(5);
+tree.insert(3);
+tree.insert(8);
+tree.insert(1);
+tree.insert(7);
+tree.insert(9);
+
+console.log(tree);
+
+//* insert method
+//* this will insert nodes into the BST
