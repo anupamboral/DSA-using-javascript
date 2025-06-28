@@ -1515,10 +1515,78 @@ class BST {
       }
     }
   }
+
+  includes(value) {
+    //* initially we will check if there is any root node or not to ensure that we have a tree
+    if (!this.root) {
+      return false; //* f there is not root that means there is no tree because root node is the first node so in that case we will return false.
+    }
+
+    //* creating a temp variable to compare with value when it will match we will return true. initially we will set this variable's value to the root node , because we will start to check from the top node of the BST.
+    let temp = this.root;
+
+    //* looping the tree using while(temp) because without temp there is no meaning of looping the tree as this temp is initially the root node, if there is no root node that means there is no tree
+    while (temp) {
+      if (value < temp.value) {
+        //* if the value we are finding is less than the temp.value then we will move temp variable to the left child node of that specific node.
+        temp = temp.left;
+      } else if (value > temp.value) {
+        //* if the value we are finding is greater than the temp.value then we will move temp variable to the right child node of that specific node.
+        temp = temp.right;
+      } else {
+        //* when temp.value is equal to value we trying to find that means we found our result so we can return true .
+        return true;
+      }
+    }
+    //* if the tree doesn't include the value we are trying to find then we can return false.
+    return false;
+  }
 }
 
 //* creating a instance of our BST m
 const tree = new BST();
+
+//* insert method
+//* this will insert nodes into the BST
+/* //* creating new new node
+    const newNode = new BSTNode(value);
+
+    //* initially we set root node's value to null, so now first we will set the root's value to this newNode if root's value is null
+    if (this.root === null) {
+      this.root = newNode;
+      return this; //* in this case , the received value is used to create the root node so we can immediately return
+    }
+
+    //* creating a temporary variable to keep track of the root node
+    let temp = this.root;
+    //* we are using the while loop and true value inside the condition because we don't know how many time we will use this insert method and how many nodes we will insert using this.
+    while (true) {
+      //* if newNode's value and temp's(root node) value is same then there is no meaning of adding that value because that value will b a duplicate so we will return undefined in that case.
+      if (newNode.value === temp.value) {
+        return undefined;
+      }
+
+      //* now we will check if newNode's value is less than root node, then according to the rule , we should add the newNode at the left pointer
+      if (newNode.value < temp.value) {
+        //* then first we have to check the left pointer is empty or not , if it is empty that means it is null
+        if (temp.left === null) {
+          temp.left = newNode;
+          //* returning the BST          return this;
+        } else {
+          //* finally that is not the case so if the left pointer is not empty then we will set temp's value to temp.left (left pointer)
+          temp = temp.left;
+        }
+      } else {
+        //* in this case newNode's value will be more than the root node so it should be added to the right pointer
+        //* first we will check if the right pointer is empty
+        if (temp.right === null) {
+          temp.right = newNode;
+          return this; //*returning the BST
+        } else {
+          //* finally that is not the case so if the right pointer is not empty then we will set temp's value to this.right (right pointer)
+          temp = temp.right;
+        }
+      }*/
 
 tree.insert(5);
 tree.insert(3);
@@ -1529,5 +1597,7 @@ tree.insert(9);
 
 console.log(tree);
 
-//* insert method
-//* this will insert nodes into the BST
+//* includes method of BST
+//* it will help us to search a specific node using the value in our entire tree
+console.log(tree.includes(7)); //* true
+console.log(tree.includes(6)); //* false
