@@ -1601,3 +1601,25 @@ console.log(tree);
 //* it will help us to search a specific node using the value in our entire tree
 console.log(tree.includes(7)); //* true
 console.log(tree.includes(6)); //* false
+
+//*? Recursion
+//* Recursion is when a function when a function calls itself.But it does not calls itself exactly the same way each time.
+//* go to 4h 17 min to under stand below three lines
+//* the function makes the problem smaller be changing the input a bit.Like opening a smaller doll inside the bigger one.
+//* there is simple case, that the function can solve without calling itself again.this is called the base case.(the smallest doll)
+//* as long as, it is not the because, the function calls itself with the smaller problem
+
+//* so lets create a recursive function
+//* we will create a countdown function using recursion, we will pass 5 as argument and it will print till 0 then stop. we could have done it using loop but this time we will do it using recursion function. and obviously we have to write a base case to stop the function call at a particular point unless it will run into a infinite loop, also called stack overflow.
+function countdown(number) {
+  //* base case (it wil stop at 0)
+  if (number === 0) {
+    console.log(`we have finished the countdown 🥂🥂`);
+    return;
+  }
+  //* every time it will less 1 from the number and call the function
+  console.log(number);
+  countdown(number - 1);
+}
+
+countdown(5);
