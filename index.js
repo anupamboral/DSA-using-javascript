@@ -1541,6 +1541,31 @@ class BST {
     //* if the tree doesn't include the value we are trying to find then we can return false.
     return false;
   }
+
+  breadthFirstSearch() {
+    //* to keep track of the current node we will create a current var with the initial value of the root node
+    let current = this.root;
+    let queue = []; //* queue initially empty
+    let data = []; //* data array initially empty
+
+    //* pushing current node into queue
+    queue.push(current);
+
+    //* now we need to iterate our full tree to access all of the nodes but as we do not know how many nodes are inside the tree so we will not use for loop instead we will use while loop, so until there is something inside the queue it will continue to iterate
+    while (queue.length) {
+      current = queue.shift(); //* for removing the node from the queue to empty it and saving that as current's value
+      //* pushing that current nodes value to data array
+      data.push(current.value);
+
+      //* if some node is present at the left pointer of the current node we will add that to the queue
+      if (current.left) queue.push(current.left);
+
+      //* if some node is present at the right pointer of the current node we will add that to the queue
+      if (current.right) queue.push(current.right);
+    }
+    //* finally returning our data array
+    return data;
+  }
 }
 
 //* creating a instance of our BST m
@@ -1638,7 +1663,7 @@ function factorial(number) {
 
 console.log(factorial(5)); //*120
 
-//? Tree traversal (Breadth first search)
+//? Tree traversal (Breadth first search - BFS)
 //* a tree traversal just simply means that we are going to be accessing each item inside the tree and we are going to be storing them in some sort of array
 // *  there are a lot of ways we can do that  but first of all let us talk about the first one which is called the bfs or you can say the breadth first search.
 // *  we are going to be 1st of all starting from the root node and we are going to be providing that node to our queue(array) so we are going to be creating our own queue not our own queue but array so yeah we're going to be taking our item from our root which will be the first item , we're going to be placing  in that queue, the next thing that we have to do is that we have to take this data from this queue and we have to pass  inside our data array so we are going to be providing the entire node to queue and we are going to be only taking the data from that node and we are going to be passing that to this data array,now before going to the next child level , always we have to clean the queue so remove the root node but we don't need to clean the data array.
@@ -1651,3 +1676,6 @@ console.log(factorial(5)); //*120
 //* now in the right 8 valued node has two child nodes 7,9. we will add both nodes to the queue and 7,9 to the data array.
 //* then again clean the queue
 //* now the queue(array) is empty and data array - [5,3,8,1,7,9]
+
+//* So let's go inside our binary search tree and write this breadth first search method their.
+console.log(tree.breadthFirstSearch()); //*[5,3,8,1,7,9] as we expected
