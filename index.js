@@ -1637,3 +1637,17 @@ function factorial(number) {
 }
 
 console.log(factorial(5)); //*120
+
+//? Tree traversal (Breadth first search)
+//* a tree traversal just simply means that we are going to be accessing each item inside the tree and we are going to be storing them in some sort of array
+// *  there are a lot of ways we can do that  but first of all let us talk about the first one which is called the bfs or you can say the breadth first search.
+// *  we are going to be 1st of all starting from the root node and we are going to be providing that node to our queue(array) so we are going to be creating our own queue not our own queue but array so yeah we're going to be taking our item from our root which will be the first item , we're going to be placing  in that queue, the next thing that we have to do is that we have to take this data from this queue and we have to pass  inside our data array so we are going to be providing the entire node to queue and we are going to be only taking the data from that node and we are going to be passing that to this data array,now before going to the next child level , always we have to clean the queue so remove the root node but we don't need to clean the data array.
+//* see image - (images\breadth first search.jpg)
+// * now the next thing that we have to do is that we have to search for the left pointer node and also So the right pointer node and why is that? because we are now providing this entire node , so as the root has a pointer of the left and also to the right . so we will be adding the left pointer node(3) and the right pointer node(8) to the queue and also add the data 3,8 to the data array.
+//* now again clean the queue, right now queue - [], data array =[5,3,8]
+//* see image - (images\breadth first search.jpg)
+
+//* now we will go one level down, first from 3 's left node we will add 1 valued node to the queue and and also add 1 to the data array then again clean the queue.
+//* now in the right 8 valued node has two child nodes 7,9. we will add both nodes to the queue and 7,9 to the data array.
+//* then again clean the queue
+//* now the queue(array) is empty and data array - [5,3,8,1,7,9]
