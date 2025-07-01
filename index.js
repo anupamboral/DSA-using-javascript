@@ -1623,3 +1623,17 @@ function countdown(number) {
 }
 
 countdown(5);
+
+//* let's create another function using recursion
+//* this time we will create a function which will help us to calculate the factorial. example- factorial of 5! = 5*4*3*2*1
+
+function factorial(number) {
+  //* base case
+  if (number === 0) {
+    return 1;
+  }
+
+  return number * factorial(number - 1);
+}
+
+console.log(factorial(5)); //*120
