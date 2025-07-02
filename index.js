@@ -1566,6 +1566,22 @@ class BST {
     //* finally returning our data array
     return data;
   }
+  dfsPreOrder(node = this.root, data = []) {
+    //* initial value of the node is root node and data's initial value is empty array
+    //* base case (if there is no node then just return data which is initially empty)
+    if (node === null) return data;
+    console.log(data);
+    //* pushing the node value inside the data array
+    data.push(node.value);
+
+    //* if any data is present in the left pointer then we have to use recursion , so we will call the dfsPreOrder function here inside it with left pointer node and the data
+    if (node.left) this.dfsPreOrder(node.left, data);
+
+    //* if any data is present in the right pointer then we have to use recursion , so we will call the dfsPreOrder function recursively here inside it with right pointer node and the data
+    if (node.right) this.dfsPreOrder(node.right, data);
+
+    return data;
+  }
 }
 
 //* creating a instance of our BST m
@@ -1679,3 +1695,15 @@ console.log(factorial(5)); //*120
 
 //* So let's go inside our binary search tree and write this breadth first search method their.
 console.log(tree.breadthFirstSearch()); //*[5,3,8,1,7,9] as we expected
+
+//*? Tree traversal -- Depth first search(Pre-order) -- DFS
+//*Depth-First Search (DFS) is a method used to explore all the nodes in a tree by going as deep as possible along each branch before moving to the next one. It starts at the root node and visits every node in the tree.
+
+//*Depth-First Search (DFS) can be classified into three main types based on the order in which the nodes are visited:
+//* go to this sight for better understanding - https://www.geeksforgeeks.org/dsa/dfs-traversal-of-a-tree-using-recursion/
+
+//*Pre-order Traversal: Visits the root node first, then recursively explores the left and right subtrees.
+//*In-order Traversal: Explores the left subtree first, then visits the root, and finally the right subtree.
+//*Post-order Traversal: Explores the left and right subtrees first, then visits the root node.
+
+console.log(tree.dfsPreOrder()); //*[5,3,1,8,7,9] //* first root , then check all left nodes then right, see the method and the video,4h35m
