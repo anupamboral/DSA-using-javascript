@@ -1582,6 +1582,21 @@ class BST {
 
     return data;
   }
+
+  dfsPostOrder(node = this.root, data = []) {
+    //* initial value of the node is root node and data's initial value is empty array
+    //* base case (if there is no node then just return data which is initially empty)
+    if (node === null) return data;
+    // console.log(data);
+
+    if (node.left) this.dfsPostOrder(node.left, data);
+
+    if (node.right) this.dfsPostOrder(node.right, data);
+    //* pushing the node value inside the data array (starting form the deepest left side leaf node then right leaf then parent then root at last)
+    data.push(node.value);
+
+    return data;
+  }
 }
 
 //* creating a instance of our BST m
@@ -1702,8 +1717,11 @@ console.log(tree.breadthFirstSearch()); //*[5,3,8,1,7,9] as we expected
 //*Depth-First Search (DFS) can be classified into three main types based on the order in which the nodes are visited:
 //* go to this sight for better understanding - https://www.geeksforgeeks.org/dsa/dfs-traversal-of-a-tree-using-recursion/
 
-//*Pre-order Traversal: Visits the root node first, then recursively explores the left and right subtrees.
+//*Pre-order Traversal (see image- dfs pre-order.jpg): Visits the root node first, then recursively explores the left and right subtrees.here we start at root node then add it value to the array then its left child and add that's value then the left of that child we will add it value and it leaf node then we will go to right leaf node ad that's value then finally the right pointer side of the root node and add the first child's value to the array then the left child (leaf) and then the right child(leaf).
+
 //*In-order Traversal: Explores the left subtree first, then visits the root, and finally the right subtree.
 //*Post-order Traversal: Explores the left and right subtrees first, then visits the root node.
 
 console.log(tree.dfsPreOrder()); //*[5,3,1,8,7,9] //* first root , then check all left nodes then right, see the method and the video,4h35m
+
+//* Depth first search(post-order)(see image- dfs post-order.jpg):- it starts from the root node but doesn't add the root node in the array at first, first it goes to the deepest leaf node in the left and add that leaf node's value to the data array then again come to one level up so to the parent of that leaf node then go to the right leaf node and add this right leaf nodes value and then the parent of those leaf node and then add that parent's value then comes back to the root but doesn't add the root value , now it goes to right pointer of the root node then from this right pointer it reaches to the deepest left leaf node of that right pointer side and add that leaf node's value to the array then again come one level up then goes to the right and add that right leaf node's value and the parent's value so the right pointer's value of root's node it adds then at last it adds the root node value. basically it starts from the deepest left side leaf node then right side leaf node then the upper nodes and at last the root node value will be added to the array.
