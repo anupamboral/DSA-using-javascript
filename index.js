@@ -1597,6 +1597,22 @@ class BST {
 
     return data;
   }
+
+  dfsInOrder(node = this.root, data = []) {
+    //* initial value of the node is root node and data's initial value is empty array
+    //* base case (if there is no node then just return data which is initially empty)
+    if (node === null) return data;
+    // console.log(data);
+
+    if (node.left) this.dfsInOrder(node.left, data);
+
+    //* pushing the node value inside the data array (starting form the deepest left side leaf node then its parent then root then right side deepest left leaf node then the parent and then the deepest right leaf node)
+    data.push(node.value);
+
+    if (node.right) this.dfsInOrder(node.right, data);
+
+    return data;
+  }
 }
 
 //* creating a instance of our BST m
@@ -1725,3 +1741,6 @@ console.log(tree.breadthFirstSearch()); //*[5,3,8,1,7,9] as we expected
 console.log(tree.dfsPreOrder()); //*[5,3,1,8,7,9] //* first root , then check all left nodes then right, see the method and the video,4h35m
 
 //* Depth first search(post-order)(see image- dfs post-order.jpg):- it starts from the root node but doesn't add the root node in the array at first, first it goes to the deepest leaf node in the left and add that leaf node's value to the data array then again come to one level up so to the parent of that leaf node then go to the right leaf node and add this right leaf nodes value and then the parent of those leaf node and then add that parent's value then comes back to the root but doesn't add the root value , now it goes to right pointer of the root node then from this right pointer it reaches to the deepest left leaf node of that right pointer side and add that leaf node's value to the array then again come one level up then goes to the right and add that right leaf node's value and the parent's value so the right pointer's value of root's node it adds then at last it adds the root node value. basically it starts from the deepest left side leaf node then right side leaf node then the upper nodes and at last the root node value will be added to the array.
+
+//* Depth first search ( in-order) (see image - dfs in-order.jpg):- in this method we start from the root but does not add the root node's value to the data array at first , at first we start from the root and in the left side we go as deep as possible so we reach to the deepest leaf node at the left side then we add this left side deepest node value to the array and then go back to it's parent and add it's value to the array and finally go back to the root node and add the root node's value to the array and finally at we go to thr right pointer side of the root and try to go as deep as possible in the left side of this right side pointer node then add it value then go back one level up and add the parent node's value then finally again go to the right child  of this parent and add it's value to the array.
+console.log(tree.dfsInOrder());
