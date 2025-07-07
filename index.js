@@ -1789,3 +1789,48 @@ class Graph {
 //* creating a instance of our graph
 const g = new Graph();
 console.log(g);
+
+//* after creating graph instance , now we have to define our vertex/node/property inside the object we created. every property/vertex will have the edges/connections as their value.
+//* So to add a vertex/property/node we will create a addVertex  method in our graph class
+//* addVertex method
+//* implementation of the method
+/* addVertex(vtx) {
+    
+    //* checking for the duplicate values(if the same vertex is not present inside the adjacent list)
+    if (!this.adjacencyList[vtx]) {
+      //* creating the vertex inside the adjacent list when there is no duplicate already present
+      this.adjacencyList[vtx] = []; //* initially its value will be this empty array, later we will save the edges/connections this this array;
+      //* to confirm that we have successfully added the vertex we will return true
+      return true;
+    };
+
+    //* incase the vtx ius already present then because of the duplicate value we will return false,
+    return false;
+  }*/
+
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+g.addVertex("D");
+g.addVertex("E");
+console.log(g); //*Graph{adjacencyList:{ "A": [], "B": [], "C": [], "D": [], "E": []}};
+
+//* now we have the vertices/nodes.but the nodes doesn't have the data of their connections/edges. in their array.
+//* now let's add a method to add edges in the vertex arrays.
+
+//* addEdges methods
+//* implementation of the method
+/*addEdges(vtx1, vtx2) {
+    //* at first it will check vtx1, vtx2 is already present inside the graph or not , and if present then only we will add both inside each other's edges/connection arrays.
+    if (this.adjacencyList[vtx1] && this.adjacencyList[vtx2]) {
+      this.adjacencyList[vtx1].push(vtx2);//* adding vtx2 in vtx1's array
+      this.adjacencyList[vtx2].push(vtx1);//* adding vtx1 in vtx2's array
+      return true;//* after successfully creating the connection we will return true
+    };
+
+    //* if the vertices are not present inside the Graph's adjacent list then we will return false
+    return false;
+  }*/
+
+g.addEdges("A", "B");
+console.log(g);
