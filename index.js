@@ -1744,3 +1744,48 @@ console.log(tree.dfsPreOrder()); //*[5,3,1,8,7,9] //* first root , then check al
 
 //* Depth first search ( in-order) (see image - dfs in-order.jpg):- in this method we start from the root but does not add the root node's value to the data array at first , at first we start from the root and in the left side we go as deep as possible so we reach to the deepest leaf node at the left side then we add this left side deepest node value to the array and then go back to it's parent and add it's value to the array and finally go back to the root node and add the root node's value to the array and finally at we go to thr right pointer side of the root and try to go as deep as possible in the left side of this right side pointer node then add it value then go back one level up and add the parent node's value then finally again go to the right child  of this parent and add it's value to the array.
 console.log(tree.dfsInOrder());
+
+//? Graph
+//*A graph is a non-linear data structure that models relationship between objects.It consists of two two components - Vertices(Nodes) & Edges.
+//* Vertices :- These represent the individual entities within the graph.Vertex is singular for and vertices are plural.
+//* Edges :- These connect vertices, signifying a relationship or connection between them
+//* to represent graphs we have two common ways:-
+//* 1. Adjacency Matrix (see image- images\adjacency matrix.jpg)
+//* 2. Adjacency List (see image - images\adjacency list.jpg)
+//* these help us to understand the connections of different edges with the nodes/vertices
+
+//* Initially we will use adjacency list to understand the graph , so let's create a graph first
+
+class Graph {
+  constructor() {
+    this.adjacencyList = {}; //* our graph will have this adjacency list which will point to a empty object initially
+  }
+
+  addVertex(vtx) {
+    //* checking for the duplicate values(if the same vertex is not present inside the adjacent list)
+    if (!this.adjacencyList[vtx]) {
+      //* creating the vertex inside the adjacent list when there is no duplicate already present
+      this.adjacencyList[vtx] = []; //* initially its value will be this empty array, later we will save the edges/connections this this array;
+      //* to confirm that we have successfully added the vertex we will return true
+      return true;
+    }
+
+    //* incase the vtx ius already present then because of the duplicate value we will return false,
+    return false;
+  }
+  addEdges(vtx1, vtx2) {
+    //* at first it will check vtx1, vtx2 is already present inside the graph or not , and if present then only we will add both inside each other's edges/connection arrays.
+    if (this.adjacencyList[vtx1] && this.adjacencyList[vtx2]) {
+      this.adjacencyList[vtx1].push(vtx2); //* adding vtx2 in vtx1's array
+      this.adjacencyList[vtx2].push(vtx1); //* adding vtx1 in vtx2's array
+      return true; //* after successfully creating the connection we will return true
+    }
+
+    //* if the vertices are not present inside the Graph's adjacent list then we will return false
+    return false;
+  }
+}
+
+//* creating a instance of our graph
+const g = new Graph();
+console.log(g);
