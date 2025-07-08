@@ -1784,6 +1784,23 @@ class Graph {
     //* if the vertices are not present inside the Graph's adjacent list then we will return false
     return false;
   }
+  removeEdges(vtx1, vtx2) {
+    //* at first it will check vtx1, vtx2 is already present inside the graph or not
+    if (this.adjacencyList[vtx1] && this.adjacencyList[vtx2]) {
+      //* below filtration means , vertex1's value(array) should contain other values , but not the value of of vertex2
+      this.adjacencyList[vtx1] = this.adjacencyList[vtx1].filter(
+        (v) => v !== vtx2
+      );
+      //* below filtration means , vertex2's value(array) should contain other values , but not the value of of vertex1
+      this.adjacencyList[vtx2] = this.adjacencyList[vtx2].filter(
+        (v) => v !== vtx1
+      );
+      //* after success return true
+      return true;
+    }
+    //* incase it's successful then return false
+    return false;
+  }
 }
 
 //* creating a instance of our graph
@@ -1833,4 +1850,31 @@ console.log(g); //*Graph{adjacencyList:{ "A": [], "B": [], "C": [], "D": [], "E"
   }*/
 
 g.addEdges("A", "B");
-console.log(g);
+g.addEdges("B", "C");
+g.addEdges("C", "D");
+g.addEdges("D", "E");
+g.addEdges("E", "A");
+console.log(g); //*{ "A": ["B","E"], "B": ["A","C" ], "C": ["B","D" ], "D": [     "C","E" ], "E": ["D","A" ]}
+
+//* removeEdges method
+//* implementation of the method
+/*removeEdges(vtx1, vtx2) {
+    //* at first it will check vtx1, vtx2 is already present inside the graph or not
+    if (this.adjacencyList[vtx1] && this.adjacencyList[vtx2]) {
+      //* below filtration means , vertex1's value(array) should contain other values , but not the value of of vertex2
+      this.adjacencyList[vtx1] = this.adjacencyList[vtx1].filter(
+        (v) => v !== vtx2
+      );
+      //* below filtration means , vertex2's value(array) should contain other values , but not the value of of vertex1
+      this.adjacencyList[vtx2] = this.adjacencyList[vtx2].filter(
+        (v) => v !== vtx1
+      );
+      //* after success return true
+      return true;
+    }
+    //* incase it's successful then return false
+    return false;
+  }*/
+
+//* removing connections between A,B.
+g.removeEdges("A", "B"); //*{ "A": ["E"], "B": ["C"], "C": ["B","D"], "D": ["C","E"], "E": ["D","A"]}
