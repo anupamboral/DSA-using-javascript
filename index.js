@@ -1801,6 +1801,23 @@ class Graph {
     //* incase it's successful then return false
     return false;
   }
+  removeVertex(vtx) {
+    //* the vertex is already not present then we will return undefined
+    if (!this.adjacencyList[vtx]) return undefined;
+
+    //* every vertex has the list of its connections (like A :[B,E]) , we iterating the connections/ neighbors array , so we can access all the other vertices connected with this specific vertex, and then from those neighbor's/connection's arrays we are removing the specific vertex.So after removing the vertex other vertices doesn't contain its link in their connection arrays.
+    for (const neighbor of this.adjacencyList[vtx]) {
+      this.adjacencyList[neighbor] = this.adjacencyList[neighbor].filter(
+        (v) => v !== vtx
+      );
+    }
+
+    //* deleting the vertex
+    delete this.adjacencyList[vtx];
+
+    //* returning the graph
+    return this;
+  }
 }
 
 //* creating a instance of our graph
@@ -1878,3 +1895,25 @@ console.log(g); //*{ "A": ["B","E"], "B": ["A","C" ], "C": ["B","D" ], "D": [   
 
 //* removing connections between A,B.
 g.removeEdges("A", "B"); //*{ "A": ["E"], "B": ["C"], "C": ["B","D"], "D": ["C","E"], "E": ["D","A"]}
+
+//* removeVertex method
+//* implementation of the method
+/* removeVertex(vtx) {
+    //* the vertex is already not present then we will return undefined
+    if (!this.adjacencyList[vtx]) return undefined;
+
+    //* every vertex has the list of its connections (like A :[B,E]) , we iterating the connections/ neighbors array , so we can access all the other vertices connected with this specific vertex, and then from those neighbor's/connection's arrays we are removing the specific vertex.So after removing the vertex other vertices doesn't contain its link in their connection arrays.
+    for (const neighbor of this.adjacencyList[vtx]) {
+      this.adjacencyList[neighbor] = this.adjacencyList[neighbor].filter(
+        (v) => v !== vtx
+      );
+    }
+
+    //* deleting the vertex
+    delete this.adjacencyList[vtx];
+
+    //* returning the graph
+    return this;
+  }*/
+g.removeVertex("D");
+console.log(g);
