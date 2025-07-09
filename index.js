@@ -1773,6 +1773,7 @@ class Graph {
     //* incase the vtx ius already present then because of the duplicate value we will return false,
     return false;
   }
+  //* connection
   addEdges(vtx1, vtx2) {
     //* at first it will check vtx1, vtx2 is already present inside the graph or not , and if present then only we will add both inside each other's edges/connection arrays.
     if (this.adjacencyList[vtx1] && this.adjacencyList[vtx2]) {
@@ -1917,3 +1918,29 @@ g.removeEdges("A", "B"); //*{ "A": ["E"], "B": ["C"], "C": ["B","D"], "D": ["C",
   }*/
 g.removeVertex("D");
 console.log(g);
+
+//? bubble sort
+//* Among many types of sorting algorithms bubble sort is one , simply it sort numbers in smaller to bigger order, like if we have - [4,2,3,1,5,6], then in this sorting algo will loop over the array and in each iteration , it will compare a number with the next one , and place the bigger number in the right and smaller in the left and finally it will give us a result like - [1,2,3,4,5,6].
+//* so lets implement bubble sort
+
+function bubbleSort(arr) {
+  //* first loop is for iterating the array
+  for (let i = arr.length - 1; i > 0; i--) {
+    //* second loop is for swapping the values
+    for (let j = 0; i > j; j++) {
+      //* if the first value is greater than the second value only then we will swap the values
+      if (arr[j] > arr[j + 1]) {
+        let temp = arr[j]; //* this temp is for having the reference of the first value , because in the next line we changed the first value with the second one.
+        arr[j] = arr[j + 1];
+        //* now using the temp we can change the second one's value with first one.
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  //* returning the array
+  return arr;
+}
+
+let myArr = [4, 2, 3, 1, 6, 5];
+
+console.log(bubbleSort(myArr));
