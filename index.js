@@ -1944,3 +1944,34 @@ function bubbleSort(arr) {
 let myArr = [4, 2, 3, 1, 6, 5];
 
 console.log(bubbleSort(myArr));
+
+//? selection sort
+//* it is a bit different from the bubble sort, though finally it will sort from the smaller to the bigger. but the sorting process is bit different from the previous one.
+//* like we have ar array [4,2,6,5,1,3] , first it will start from the first value and compare with the second one , so 4, and 2 , and as 2 is min/lesser value , so it will mark 2 as the min value,using a pointer or temporary variable, then again compare, 4 and 6, here 6 the bigger, then 4 and 5 here also 5 is bigger , then 4 and 1 , now 1 is lesser than 4 and 1 is lesser than the previous min value 2 , so now we will remove the min value pointer from 2 and put the pointer on 1 , and now again compare , 4 and 3 , now 3 is lesser than 4 but greater than 1 which is the min value till now , so now we will swap 4 and the min value 1 , so now our array will look like [1,2,6,5,4,3], in the next iteration ww will start the comparison from the second value , so 2, 6 then 2,5 then 2, 4, then 2, 3 and in this iteration no value is smaller than the 2 so no swap will happen and the array array will be same , now in the third iteration the caparison start from the third value, 6,5 , here 5 is min value then , 6,4 , now 4 is min value, then 6,3 , and now 3 is the min value because it s smaller than previous smaller value 4 , so this time swap will happen , between 6 and 3 and the array will look like, [1,2,3,5,4,6], now in the next iteration will start from 4 the number which 5 and 4 here 4 is min value, then 5,6 , so in this iteration 4 is min value so again swap will happen between 5,4 then array will look like [1,2,3,4,5,6] and now in the last iteration no swap will happen between 5,6 because 6 is greater than 5 so the final array is [1,2,3,4,5,6] after doing selection sort.
+//* So lets implement it
+function selectionSort(arr) {
+  //* iteration the array
+  for (let i = 0; i < arr.length; i++) {
+    //* minIndex is for tracking min value, initially it will be the first value of the array
+    let minIndex = i;
+
+    //* this loop is iterating the unsorted part of the array(that's j =1+1 so when "i" is first value then j would be i+1 , which is the second value)
+    for (let j = i + 1; j < arr.length; j++) {
+      //* when second value smaller than minIndex value than set minIndex value to j's index.
+      if (arr[j] < arr[minIndex]) {
+        minIndex = j;
+      }
+    }
+    //* after each above iteration  swapping the first value with the minIndex value
+    if (i !== minIndex) {
+      //* temporarily saving the first value
+      let temp = arr[i];
+      arr[i] = arr[minIndex]; //* swapping values
+      arr[minIndex] = temp;
+    }
+  }
+  return arr;
+}
+
+let myArray2 = [4, 2, 6, 5, 1, 3];
+console.log(selectionSort(myArray2));
