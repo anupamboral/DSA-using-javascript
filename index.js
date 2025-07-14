@@ -2004,7 +2004,7 @@ const unsortedArray = [5, 2, 4, 6, 1, 3];
 console.log(insertionSort(unsortedArray));
 
 //? merge function (see last part of the video named to understand -- create merge)
-
+//* it will combine two arrays and sort them out
 function merge(leftArr, rightArr) {
   const result = []; //* empty array to push values
   let i = 0; //* for referencing first value of the left array
@@ -2029,3 +2029,22 @@ function merge(leftArr, rightArr) {
 const res = merge([3, 27, 38, 43], [9, 10, 17, 82]);
 
 console.log(res);
+
+//? merge sort(see video)
+//* it will allow us to split out our one array into multiple arrays
+function mergeSort(arr) {
+  //*  in this function we have to use recursion so we have to write the base case so our function doesn't cause stack overflow
+  if (arr.length <= 1) return arr;
+
+  //* dividing teh array in to two halves
+  const middle = Math.floor(arr.length / 2);
+  const left = arr.slice(0, middle);
+  const right = arr.slice(middle);
+
+  //* finally we have to use our callback function merge (above and also the recursive function (this function))
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+const unsortedArray2 = [38, 27, 43, 3, 9, 82, 10];
+const sortedArray = mergeSort(unsortedArray2);
+console.log(sortedArray);
