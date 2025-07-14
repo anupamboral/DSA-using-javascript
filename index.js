@@ -2002,3 +2002,30 @@ function insertionSort(arr) {
 
 const unsortedArray = [5, 2, 4, 6, 1, 3];
 console.log(insertionSort(unsortedArray));
+
+//? merge function (see last part of the video named to understand -- create merge)
+
+function merge(leftArr, rightArr) {
+  const result = []; //* empty array to push values
+  let i = 0; //* for referencing first value of the left array
+  let j = 0; //* for referencing first value of the right array
+
+  //* iterate till left pointer is lesser than left array's length and right pointer is lesser than right array's length
+  while (i < leftArr.length && j < rightArr.length) {
+    if (leftArr[i] < rightArr[j]) {
+      result.push(leftArr[i]);
+      i++;
+    } else {
+      result.push(rightArr[j]);
+      j++;
+    }
+  }
+
+  result.push(...leftArr.slice(i));
+  result.push(...rightArr.slice(j));
+  return result;
+}
+
+const res = merge([3, 27, 38, 43], [9, 10, 17, 82]);
+
+console.log(res);
