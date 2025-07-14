@@ -1980,3 +1980,25 @@ console.log(selectionSort(myArray2));
 //* if we have a array like [5,2,4,6,1,3], so it will not start from the first value 5 instead it will start from the second value 2 and compare it with the second value , now between 5 and 2 , as 2 is less so we will swap the positions and the array will look like [2,5,4,6,1,3] , now compare 5, 4 , and 4 is lesser so again swap will happen and array will look like [2,4,5,6,1,3] , now between 5 and 6 no swap will happen , now 6 and 1 , as 1 lesser so swap should happen right?
 //* yes swap will happen but 1 will not take the place 6 because before 6 we have 5 , and 1 is also lesser than 5 , now before 5 we have 4 , and 1 is also lesser than 4 , and now before 4 we have 2 and 1 is also lesser than 2 so finally 1 should be placed before 2, so the array will look like [1,2,4,5,6,3],
 //* and now compare between 6 and 3 , 3 is lesser than 6 , but before 6 we have 5 and 3 is also lesser than 5 , then before 5 we have 4 , and 3 is also lesser than 4 , and finally before 4 we have 2 , and 3 is greater than 2 so finally 3 should be placed between 2 and 4. and the array will look like [1,2,3,4,5,6].
+
+function insertionSort(arr) {
+  //* iterating the array but from the 1 st index not 0th index because in theory we already learnt the comparison start from the second value
+  for (let i = 1; i < arr.length; i++) {
+    const current = arr[i]; //* reference of the current value
+
+    //* reference of previous value of i
+    let j = i - 1;
+
+    while (j >= 0 && arr[j] > current) {
+      //* setting the second value equal to first value
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = current;
+  }
+  //* return
+  return arr;
+}
+
+const unsortedArray = [5, 2, 4, 6, 1, 3];
+console.log(insertionSort(unsortedArray));
